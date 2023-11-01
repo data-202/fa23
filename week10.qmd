@@ -1,6 +1,6 @@
 ---
 title: "DATA 202 - Week 10"
-subtitle: "Bivariate regression analysis"
+subtitle: "Midterm examination week"
 author: "Nathan Alexander, PhD"
 institute: "Center for Applied Data Science and Analytics"
 format: 
@@ -20,19 +20,4 @@ format:
     incremental: false
 ---
 
-## Part I: Context
-
-```{r}
-num <- c(1:20)
-df <- data.frame(num)
-df
-```
-
-```{r}
-df$pol <- ifelse(df$num==df$num, 1, 0) 
-df
-
-```
-## Part II: Content
-
-## Part III: Code
+The midterm examination can be found on our course canvas site [here](https://canvas.howard.edu/courses/40683).
