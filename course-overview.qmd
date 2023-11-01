@@ -25,7 +25,7 @@ A high-level view of the course.
 
 -   Contact information:
 
-    **Email**: [nathan.alexander@howard.edu](mailto:nathan.alexander@howard.edu)
+    **Email**: [nathan.alexander\@howard.edu](mailto:nathan.alexander@howard.edu)
 
     **Office hours**: By appointment at <https://nathanalexander.youcanbook.me>
 
