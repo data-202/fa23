@@ -18,4 +18,12 @@ For paper #3, we are interested in exploring theories pertaining to the relation
 
 # Step 2: Variables, Measurement, Hypothesis
 
-Our goal in paper #2 is to empirically test a hypothesis on a bivariate relationship.
+All variables and analyses should be described in detail.
+
+# Step 3: Statistical Analysis
+
+Please be sure to utilize analyses on the interactions between multiple variables.
+
+# Step 4: Conclusion
+
+For this paper, please be sure to focus on a solid conclusion based on your statistical analysis.
