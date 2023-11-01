@@ -1,0 +1,109 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  page-navigation: true
+  title: "DATA 202: Statistically Measuring and Modeling Social Justice"
+  description: "Homepage for DATA 202: Statistically Measuring and Modeling Social Justice"
+  site-url: "https://github.com/data-202/"
+  
+  repo-url: https://data-202.github.io/fa23
+  
+  open-graph: true
+  
+  twitter-card:
+    creator: "@professornaite"
+  
+  page-footer:
+    right: "This page was built by Nathan Alexander, PhD in [Quarto](https://quarto.org/)"
+    left: "&copy; Copyright 2023, Nathan Alexander"
+    background: "#D9E3E4"
+    
+  sidebar:
+    background: "#D9E3E4"
+    logo: "img/dubois-loc.jpg"
+    pinned: true
+    align: center
+    tools: 
+      - icon: github
+        href: https://data-202.github.io/fa23
+        text: "GitHub organization"
+      - icon: code-square
+        href: https://canvas.howard.edu/courses/40683
+        text: "Canvas site"
+  
+    style: "docked"
+    search: true
+    collapse-level: 1
+    contents:  
+    - section: "Course information"
+      contents:
+        - href: index.qmd
+          text: Course landing page
+        - href: course-overview.qmd
+          text: Overview
+        - href: assignments.qmd
+          text: Assignments
+        - href: computing.qmd
+          text: Computing
+        - href: schedule.qmd
+          text: Schedule
+    - section: "Weekly materials"
+      contents:
+        - href: week1.qmd
+          text: Week 1
+        - href: week2.qmd
+          text: Week 2
+        - href: week3.qmd
+          text: Week 3
+        - href: week4.qmd
+          text: Week 4
+        - href: week5.qmd
+          text: Week 5
+        - href: week6.qmd
+          text: Week 6
+        - href: week7.qmd
+          text: Week 7
+        - href: week8.qmd
+          text: Week 8
+        - href: week9.qmd
+          text: Week 9
+    - section: "Appendix"
+      contents:
+        - section: "Homeworks"
+          contents:
+            - href: hw/hw1.qmd
+              text: HW 1
+            - href: hw/hw2.qmd
+              text: HW 2
+        - section: "Labs"
+          contents:
+            - href: labs/lab1.qmd
+              text: Lab 1
+            - href: labs/lab2.qmd
+              text: Lab 2
+        - section: "Papers"
+          contents: 
+            - href: papers/annotated.qmd
+              text: Paper 1
+            - href: papers/paper2.qmd
+              text: Paper 2
+        - href: solutions.qmd
+          text: "Solutions"
+
+format:
+  html:
+    theme: 
+      light: [cosmo, theme.scss]
+      dark: [cosmo, theme-dark.scss]
+    mainfont: "Atkinson Hyperlegible"
+    callout-appearance: simple
+    colorlinnks: true
+    code-copy: true
+    code-overflow: wrap
+    toc: true
+    
+freeze: auto
+    
+editor: visual

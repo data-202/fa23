@@ -1,0 +1,92 @@
+---
+title: "Welcome to **DATA 202**"
+subtitle: "Statistically Measuring and Modeling Social Justice"
+---
+
+## Schedule
+
+::: column-screen-inset-right
+|  Part   |      Week       | Day           | Topics                                           | HWs                      |          Labs           |            Papers             |                      Other                      |     |
+|:------:|:------:|--------|--------|--------|:------:|:------:|:------:|:------:|
+|    I    | [1](week1.html) | Tues, Aug 22  | [Introduction to the course](index.html)         | [HW 0](assignments.html) | [Lab 0](computing.html) |                               |                                                 |     |
+|         | [2](week2.html) | Tues, Aug 29  | [Foundations](week2-slides.html)                 |                          |                         |     [Paper 1](week1.html)     |                                                 |     |
+|         | [3](week3.html) | Tues, Sept 5  | [Theory construction](week3-slides.html)         |                          |                         |        (Paper 1 edits)        |                                                 |     |
+|         | [4](week4.html) | Tues, Sept 12 | [More on theory construction](week4-slides.html) |                          |                         |        (Paper 1 edits)        |                                                 |     |
+|   II    | [5](week5.html) | Tues, Sept 19 | [Univariate analysis](week5-slides.html)         |                          |                         |        (Paper 1 edits)        |                                                 |     |
+|         | [6](week6.html) | Tues, Sept 26 | [Exploratory data analysis](week6-slides.html)   | [HW 1](hw/hw1.html)      | [Lab 1](labs/lab1.html) |                               |                                                 |     |
+|         | [7](week7.html) | Tues, Oct 3   | [Bivariate analysis](week7-slides.html)          |                          |                         |                               | [Annotated bibliography](papers/annotated.html) |     |
+|         | [8](week8.html) | Tues, Oct 10  | [Notes on causal theories](week8-slides.html)    |                          |                         | [Paper 2](papers/paper2.html) |                                                 |     |
+|   III   |        [9](week9.html)        | Tues, Oct 17  | [Modeling social in/justice](week9-slides.html)                       | [HW 2](hw/hw2.html)                     |          [Lab 2](labs/lab2.html)          |                               |                                                 |     |
+|         |       10        | Tues, Oct 24  | Bivariate regression analysis                    |                          |                         |                               |               Midterm examination               |     |
+|         |       11        | Tues, Oct 31  | Complex theories                                 | HW 3                     |          Lab 3          |                               |                                                 |     |
+|         |       12        | Tues, Nov 7   | Multivariate regression (part a)                 |                          |                         |            Paper 3            |                                                 |     |
+|   IV    |       13        | Tues, Nov 14  | Multivariate regression (part b)                 | HW 4                     |          Lab 4          |                               |                                                 |     |
+|         |       14        | Tues, Nov 21  | Overview of additional models                    |                          |                         |                               |                                                 |     |
+|         |       15        | Tues, Nov 28  | Wrap-up                                          | HW 5                     |          Lab 5          |                               |                                                 |     |
+| Wrap-up |       16        | Tues, Dec 5   | Open office hours                                |                          |                         |            Paper 4            |                                                 |     |
+|         |       17        | Tues, Dec 12  | No class meeting                                 |                          |                         |                               |                Final examination                |     |
+:::
+
+## Start here!
+
+### First, welcome.
+
+I am excited to learn and explore together in our course.
+
+I'll start with the [image](https://www.loc.gov/item/2003681451/) (Battey, C. M., ca. 1919) to the top-left of the screen.
+
+As you may know, it is a photo of W. E. B. Du Bois[^1], who is one of the many researchers, activists, and community organizers that will help guide our statistical practices this term. Using their examples, we make sense of theories around the phenomenon of "social justice," and we use statistics to theorize.
+
+[^1]: We'll look for further details about Du Bois' work when we consider two things in particular: first, the historical context and, second, how we develop frameworks to make sense of our hypotheses.
+
+The pages on this site outline the coding components of the **DATA 202: Statistically Measuring and Modeling Social Justice** course at Howard University, taught by me: [Professor Nathan Alexander](https://professornaite.github.io).
+
+The information on this page will serve as a technical <u>*companion*</u> to our Canvas site.
+
+This page will support you in our course in the following ways:
+
+-   This page will help you work with data sets and complete small tasks over time.
+
+-   This page will walk you through the measurement aspect of research questions relevant to modeling issues of social justice.
+
+-   This page will help you integrate mathematical ideas and technical formulas into your work.
+
+-   This page will support your use of theory in your statistical practice, and increase your ability to document reproducible code around a set of research questions.
+
+Our canvas site ([click here](https://canvas.howard.edu/courses/40683)) contains readings and is where you will submit <u>all</u> assignments.
+
+This site should be paired with Canvas to help you complete course assignments.
+
+And just for good measure: all assignments should be turned in via Canvas.
+
+*When turning in assignments on Canvas*:
+
+-   Generally, **PDF submissions** are the way to go.
+
+-   I will not download any files not uploaded to **Canvas**. I will only click on a clearly visible Github repository (i.e., no shortened or bit.ly links). Article citations that include DOIs are preferred.
+
+-   We will discuss **Quarto Markdown files** which integrate code, formulas, and text. Quarto is actually how I created this site for our course, and it is a great way to communicate your technical ideas.
+
+-   This is a Canvas *companion* site/page (I'll use these terms interchangeably) and it will serve as your guide to completing all technical assignments.
+
+### <u> It is alive</u>!
+
+This is a living document, meaning that more materials will be added as topics are introduced. It is important that you check these pages regularly. You should also use this course organization as an archive of any technical code that is covered in class. Canvas contains readings and this page will integrate code.
+
+### Just a reminder.
+
+**Canvas contains readings**. *This site integrates code*. <u>All submissions go to Canvas</u>: [here](https://canvas.howard.edu/courses/40683).
+
+### Next up: Overview
+
+The overview in the next section will walk you through the technical flow of the course.
+
+Like this section, a preview of forthcoming topics will be included at the bottom of each page; this means that you can treat this site like a textbook that you would read in order from start to finish. Though I encourage you to explore what else is out there and make use of other resources. That said, submissions should follow the formal guidelines outlined on our syllabus, Canvas, and this site.
+
+-   The **syllabus** provides a high-level view of the course.
+
+-   **Canvas** is the go-to for submissions and provides readings and assignments.
+
+-   This **course site** provides technical items and code to help you complete your assignments.
+
+Coming up next are the four parts of the course and an overview of the assignments for the term. Course topics are outlined in more detail and integrated into the assignment submission schedule on the next page; see you over there!
