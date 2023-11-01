@@ -1,0 +1,34 @@
+---
+title: "Lab 3"
+subtitle: "DATA 202 - Alexander - Fall 2023"
+format: 
+  html:
+    self-contained: true
+    self-contained-math: true
+  pdf: 
+    toc: false
+    lof: false
+    lot: false
+    number-sections: false
+    geometry:
+      - top=30mm
+      - left=20mm
+      - heightrounded
+    colorlinks: true
+pdf-engine: pdflatex
+editor: visual
+---
+
+For Lab 3, you may submit your solutions to Canvas as a `.pdf` or an *R Script* or even as a `.txt` file.
+
+Please see the *Preparing Lab Reports* at the bottom of the [lab 1](labs/lab1.qmd) assignment.
+
+## Learning Objectives
+
+The `Lab 3` assignment focuses on you exploring any two variables located in one of the data frames that we have explored, with a preference for the `gssr` package over `gss_cat`. You will again return to some of the functions we have used before to clean variables and manipulate data frames.
+
+Your analyses in this lab should focus on a *regression analysis between two variables*, one or both variables must be a numeric.
+
+**Please note: you should not use the same variables from a previous assignment but you may use the same data set.**
+
+Importantly, your analysis in lab 3 should inform the paper 3 assignment.

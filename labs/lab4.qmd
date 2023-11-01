@@ -1,0 +1,34 @@
+---
+title: "Lab 4"
+subtitle: "DATA 202 - Alexander - Fall 2023"
+format: 
+  html:
+    self-contained: true
+    self-contained-math: true
+  pdf: 
+    toc: false
+    lof: false
+    lot: false
+    number-sections: false
+    geometry:
+      - top=30mm
+      - left=20mm
+      - heightrounded
+    colorlinks: true
+pdf-engine: pdflatex
+editor: visual
+---
+
+For Lab 4, you may submit your solutions to Canvas as a `.pdf` or an *R Script* or even as a `.txt` file.
+
+Please see the *Preparing Lab Reports* at the bottom of the [lab 1](labs/lab1.qmd) assignment.
+
+## Learning Objectives
+
+The `Lab 4` assignment focuses on you exploring multiple variables located in gssr.
+
+Your inquiry in this lab should focus on a *multivariate regression analysis*.
+
+**Please note: you may use the same variables from a previous assignment but please use different questions.**
+
+Importantly, your analysis in lab 4 should inform the paper 4 assignment.

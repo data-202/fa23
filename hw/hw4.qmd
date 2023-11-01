@@ -1,0 +1,24 @@
+---
+title: "Homework 4"
+subtitle: "DATA 202 - Alexander - Fall 2023"
+format: 
+  html: 
+    self-contained: true
+    self-contained-math: true
+  pdf: 
+    toc: false
+    lof: false
+    lot: false
+    number-sections: false
+    geometry:
+      - top=30mm
+      - left=20mm
+      - heightrounded
+    colorlinks: true
+pdf-engine: pdflatex
+editor: visual
+---
+
+Please submit **Homework 4** responses as a `.pdf` file on Canvas [here](https://canvas.howard.edu/courses/40683).
+
+### Exercise 1.1
