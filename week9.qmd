@@ -1,0 +1,198 @@
+---
+title: "DATA 202 - Week 9"
+subtitle: "Modeling social in/justice"
+author: "Nathan Alexander, PhD"
+institute: "Center for Applied Data Science and Analytics"
+format: 
+  html: default
+  revealjs:
+    output-file: week9-slides.html
+    height: 900
+    width: 1600
+    smaller: false
+    scrollable: true
+    slide-number: c/t #< collapsed/total
+    logo: "img/howard-logo.jpg"
+    footer: "[Course Data GitHub](https://github.com/data-202)"
+    toc: false
+    theme: simple
+    echo: true
+    incremental: false
+---
+
+## Part I: Context
+
+This week launches part 3 of our course: data and policy, as in public policies.
+
+Our goals this week will be to formulate a focused definition of social justice for your particular area(s) of interest and study, and to cite references that allow us to understand the meaning of social justice in your specific intellectual domains. We will begin with an example.
+
+---
+
+### Crime statistics
+
+Data from 1973 on violent crime rates by US State in the `USArrests` data set.
+
+Values are per 100,000 residents for assault, murder, and rape.
+
+```{r}
+head(USArrests)
+tail(USArrests)
+```
+
+```{r}
+cor(USArrests$UrbanPop, USArrests$Murder)
+plot(USArrests$UrbanPop, USArrests$Murder,
+     xlab = "Percent living in urban areas",
+     ylab = "Murders per 100,000 residents")
+```
+
+What are some initial takeaways from this plot?
+
+Without a guiding theory, where might our analyses take us?
+
+---
+
+### Small group work
+
+In your groups, consider the values in the `USArrests` data and generate some questions.
+
+---
+
+## Part II: Content
+
+The methods used to collect sample data is extremely important. 
+
+If sample data are not collected in an appropriately, any resulting statistical analyses will be futile. As a result, planning a study by identifying research questions, the population and sample of interest, and considering the types of methods that will be used to analyze data that is collected are all essential parts in the statistical data analysis process.
+
+---
+
+#### More on sampling methods
+
+First, let's revisit and describe the different sampling methods:
+
+There are two broad categories of selecting members of a population to generate sample data: probability sampling and non-probability sampling. 
+
+Within these two broad categories are other methods based on the needs of the study. Each of these methods is used to support statistical data analysis with some methods providing stronger evidence than others.
+
+::: callout-DEFINITIONS
+
+Probability sampling
+
+:   involves the random selection of subjects in such a way that every member of a sample has the sample probability of being selected.
+
+Non-probability sampling
+
+:   involves the use of criteria to select data that is not based on an equal likelihood of selection.
+
+:::
+
+---
+
+##### Probability sampling methods
+
+-   **Simple random sample** of $n$ subjects ensures that every possible sample of the same size $n$ has the same chance or likelihood of being chosen.
+
+-   **Systematic sample** of $n$ subjects involves selecting every $k$th subject on some regular interval.
+
+-   **Stratified sample** involves dividing the population up into strata (groups) with the same characteristics and then randomly sampling within those strata.
+
+-   **Cluster sample** involves partitioning the population into clusters (groups), randomly selecting some clusters, and then selecting all members of the selected clusters.
+
+---
+
+##### Non-prbability sampling methods
+
+-   **Convenience sample** is data gathered from the most accessible or convenient source. Although this is easy and efficient, the data cannot produce generalizable results.
+
+-   **Purposive sample** is data gathered based on the purposes of the research or the specific research question. This strategy includes clear criteria and rationale for inclusion.
+
+-   **Snowball sample** is data gathered via recruitment by the other participants of a study. The number of subjects included "snowballs" as more contacts are generated.
+
+---
+
+###### Multistage sampling
+
+In larger studies, sometimes multistage sampling procedures are used to generate data. In this design, different samples are selected in different stages, and each stage might use a different sampling method. The end result may represent a complicated sampling design but it is often simpler and faster than some designs, such as a simple random sample.
+
+---
+
+**Missing Data**
+
+Data can be missing from a set, and the total number of elements can differ between two or more sets. 
+
+The differences in the number of elements can be due to a host of reasons, but often it is missing data. A data value can be _missing at random_ or _not missing at random_. The amount of information missing from a data set can have a minimal impact or a major impact on a statistical analysis.
+
+::: {.callout-note apperance="simple"}
+
+## **Note -- Missing data**
+
+A data value is _missing completely at random_ if the likelihood of it being missing is independent of its value or any other values in the data set is just as likely to be missing.
+
+
+A data value is _not missing at random_ if the missing value is related to the reason it is missing.
+
+:::
+
+---
+
+## Part III: Code
+
+Our coding tasks this week will focus on a new data set: [the General Social Survey, or GSS](https://gss.norc.org/).
+
+We will begin by installing a few new packages.
+
+```{r}
+#| echo: true
+#| output: false
+#| warning: false
+## install new packages
+install.packages("srvyr", repos = "http://cran.us.r-project.org")
+install.packages("statsr", repos = "http://cran.us.r-project.org")
+```
+
+Then we will load the libraries.
+
+```{r}
+#| echo: true
+#| output: false
+#| warning: false
+## load libraries
+library(tidyverse)
+library(Hmisc)
+library(descr)
+library(foreign)
+library(haven)
+library(dplyr)
+library(survey)
+library(srvyr)
+library(statsr)
+```
+
+To access the GSS data, we will need to use a remote install command.
+
+The data come from the `GSSR` package.
+
+```{r}
+#| echo: true
+#| output: false
+#| warning: false
+# install GSSR data
+remotes::install_github("kjhealy/gssr")
+library(gssr)
+```
+
+We will now load the GSS documentation.
+
+```{r}
+data(gss_doc)
+```
+
+View the GSS documentation.
+
+```{r}
+data(gss_doc)
+```
+
+We will pick up from here with live coding in class.
+
+### **Next up**: Week 10

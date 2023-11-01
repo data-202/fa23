@@ -1,0 +1,145 @@
+---
+title: "DATA 202 - Week 6"
+subtitle: "Exploratory data analysis"
+author: "Nathan Alexander, PhD"
+institute: "Center for Applied Data Science and Analytics"
+format: 
+  html: default
+  revealjs:
+    output-file: week6-slides.html
+    height: 900
+    width: 1600
+    smaller: false
+    scrollable: true
+    slide-number: c/t #< collapsted/total
+    logo: "img/howard-logo.jpg"
+    footer: "[Course Data GitHub](https://github.com/data-202)"
+    toc: false
+    theme: simple
+    echo: true
+    incremental: false
+---
+
+## Part I: Context
+
+This week's context will focus on the social politics around maps.
+
+![The world's continents. Image from https://www.visualcapitalist.com/map-true-size-of-africa/](img/lab1-truesize.jpg){width="75%"}
+
+------------------------------------------------------------------------
+
+### What is a map?
+
+-   [What is a map?](https://education.nationalgeographic.org/resource/map/#:~:text=Maps%20present%20information%20about%20the,features%2C%20and%20distances%20between%20places) This *National Geographic* education resource presents a clear overview of maps, geography, and Geographic Information Systems (GIS).
+
+------------------------------------------------------------------------
+
+### What is the real size of Africa?
+
+-   [What's the real size of Africa?](https://www.cnn.com/2016/08/18/africa/real-size-of-africa/index.html) is a CNN Africa Marketplace article that examines the Western foundations of maps and representations of the African continent.
+
+------------------------------------------------------------------------
+
+### Spatial dimensions and social cartography
+
+-   [Vaughan (2018)](https://www.jstor.org/stable/j.ctv550dcj) is an open access publication on the *spatial dimensions of social cartography*. The text contains valuable information about how maps have been used to understand health and human development issues, such as poverty, disease, housing, and the like. The text also contains notes on race and nationality, crime and disorder, and a host of references for further reading.
+
+------------------------------------------------------------------------
+
+### Mapping technologies
+
+-   [Manson & Matson (2017)](https://open.lib.umn.edu/mapping/chapter/1-maps-society-and-technology/) present an overview of society and mapping with new technological tools. While doing so, the authors provide a history of maps and examine the basic social elements of maps, the technical elements of maps, and how maps have been integrated into liberal arts education.
+
+------------------------------------------------------------------------
+
+### Maps and the social construction of race
+
+-   [Crampton (2015)](https://press.uchicago.edu/books/HOC/HOC_V6/HOC_VOLUME6_R.pdf) writes on *Maps and the Social Construction of Race* in a larger volume on maps produced by the University of Chicago Press.
+
+------------------------------------------------------------------------
+
+### Black cartographers
+
+-   [Alderman & Inwood (2021)](https://theconversation.com/how-black-cartographers-put-racism-on-the-map-of-america-155081) describe how Black cartographers use maps to examine issues of racial inequality. The authors provide a more focused discussion on the social politics of maps, as opposed to a more general overview of their functions.
+
+------------------------------------------------------------------------
+
+### Can maps be racists?
+
+-   [Can maps be racist?](https://sociologyinfocus.com/your-map-is-racist-and-heres-how-2/) Palmer (2014) provides some context to understand the technical aspects of maps as they relate to our social construction of the global world. In this review, the author situates the common functions of maps onto the social dimensions while attending to the particular periods of the development and construction of global maps; thus integrating the political dimension of knowledge creation via map making.
+
+    -- [Britton (2021)](https://areomagazine.com/2021/03/08/in-defence-of-the-mercator-projection-the-non-racism-of-maps/) in a blog post on the "non-racism of maps" offers a very different perspective on the Mercator projection. The author focuses on ideology and science in modern society. He argues that the original purpose of maps does not make them racist.
+
+------------------------------------------------------------------------
+
+### Maps and our perceptions
+
+-   [How maps distort our perception of the world](https://the-ard.com/2023/06/09/the-mercator-projection-and-how-maps-distort-the-world/) is a short and focused resource written by Lee (2023) on the Anti-Racism Daily site. The author focuses on the social politics of perception.
+
+------------------------------------------------------------------------
+
+## Part II: Content
+
+Exploratory data analysis using the `dplyr` package.
+
+------------------------------------------------------------------------
+
+### Measures of center
+
+-   `mean()` returns the mean of a single numeric variable
+
+-   `median()` returns the middle value of a single numeric variable
+
+-   `mode()` returns the variable type for the mode of a single variable
+
+-   `table()` returns a frequency table with counts of each level for a single variable
+
+------------------------------------------------------------------------
+
+### Measures of variation
+
+-   `range()` returns the `min()` and `max()` values of a single numeric variable
+
+-   `var()` returns the variance of a variable.
+
+-   `sd()` returns the standard deviation for a single numeric variable
+
+------------------------------------------------------------------------
+
+### Measures of relative standing
+
+-   `IQR()` returns the interquartile range values for a single numeric variable
+
+-   z-scores provide us a way to find the number of standard deviations for a specific variable. We compute these manually.
+
+------------------------------------------------------------------------
+
+### Other measures
+
+-   `max()` returns the maximum value of a single numeric variable
+
+-   `min()` returns the minimum value of a single numeric variable
+
+------------------------------------------------------------------------
+
+### Basic plots
+
+-   `boxplot()` returns a boxplot of a numeric variable or variables
+
+-   `hist()` returns a histogram of a single numeric variable
+
+-   `stem()` provides a stem-and-leaf plot when a single numeric variable is input.
+
+-   `plot()` provides a scatter plot of data values by its index, $i$.
+
+-   `plot(density())` provides a density plot of a single numeric variable
+
+------------------------------------------------------------------------
+
+## Part III: Code
+
+Our coding tasks this week will focus on [`Lab 1`](labs/lab1.qmd).
+
+`Lab 1` focuses on supporting you with data exploration and univariate statistics.
+
+### **Next up**: Week 7

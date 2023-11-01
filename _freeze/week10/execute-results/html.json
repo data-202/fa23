@@ -1,0 +1,14 @@
+{
+  "hash": "a036397b0afa56f5fd5eaa98cf6b9334",
+  "result": {
+    "markdown": "---\ntitle: \"DATA 202 - Week 10\"\nsubtitle: \"Bivariate regression analysis\"\nauthor: \"Nathan Alexander, PhD\"\ninstitute: \"Center for Applied Data Science and Analytics\"\nformat: \n  html: default\n  revealjs:\n    output-file: week10-slides.html\n    height: 900\n    width: 1600\n    smaller: false\n    scrollable: true\n    slide-number: c/t #< collapsed/total\n    logo: \"img/howard-logo.jpg\"\n    footer: \"[Course Data GitHub](https://github.com/data-202)\"\n    toc: false\n    theme: simple\n    echo: true\n    incremental: false\n---\n\n\n## Part I: Context\n\n\n::: {.cell}\n\n```{.r .cell-code}\nnum <- c(1:20)\ndf <- data.frame(num)\ndf\n```\n\n::: {.cell-output .cell-output-stdout}\n```\n   num\n1    1\n2    2\n3    3\n4    4\n5    5\n6    6\n7    7\n8    8\n9    9\n10  10\n11  11\n12  12\n13  13\n14  14\n15  15\n16  16\n17  17\n18  18\n19  19\n20  20\n```\n:::\n:::\n\n::: {.cell}\n\n```{.r .cell-code}\ndf$pol <- ifelse(df$num==df$num, 1, 0) \ndf\n```\n\n::: {.cell-output .cell-output-stdout}\n```\n   num pol\n1    1   1\n2    2   1\n3    3   1\n4    4   1\n5    5   1\n6    6   1\n7    7   1\n8    8   1\n9    9   1\n10  10   1\n11  11   1\n12  12   1\n13  13   1\n14  14   1\n15  15   1\n16  16   1\n17  17   1\n18  18   1\n19  19   1\n20  20   1\n```\n:::\n:::\n\n## Part II: Content\n\n## Part III: Code\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

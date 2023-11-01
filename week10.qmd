@@ -1,0 +1,38 @@
+---
+title: "DATA 202 - Week 10"
+subtitle: "Bivariate regression analysis"
+author: "Nathan Alexander, PhD"
+institute: "Center for Applied Data Science and Analytics"
+format: 
+  html: default
+  revealjs:
+    output-file: week10-slides.html
+    height: 900
+    width: 1600
+    smaller: false
+    scrollable: true
+    slide-number: c/t #< collapsed/total
+    logo: "img/howard-logo.jpg"
+    footer: "[Course Data GitHub](https://github.com/data-202)"
+    toc: false
+    theme: simple
+    echo: true
+    incremental: false
+---
+
+## Part I: Context
+
+```{r}
+num <- c(1:20)
+df <- data.frame(num)
+df
+```
+
+```{r}
+df$pol <- ifelse(df$num==df$num, 1, 0) 
+df
+
+```
+## Part II: Content
+
+## Part III: Code
