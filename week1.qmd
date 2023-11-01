@@ -1,0 +1,30 @@
+---
+title: "DATA 202 - Week 1"
+subtitle: "Introduction to the course"
+---
+
+## Paper #1
+
+[<u>**REMINDER: Paper 1 is due Thursday August 31 at 11:59pm ET**</u>]{style="color:red;"}
+
+You can read more about paper #1 [here](https://docs.google.com/document/d/1h-DImNL838QM_qRPCpvycefIW5LSgc_BFlAHX5PB9kw/edit?usp=sharing).
+
+See the instructions for paper assignments [here](https://docs.google.com/document/d/1Qsswuu50PXcPePPTTNSDLrHYJb7IX6f8x26J63e2beA/edit?usp=sharing).
+
+Also, learn more about paper assignments [here](https://docs.google.com/document/d/1JNFSQAkIqLzJeR1ZFdfFcBbWPE3m1MwbLvjdtuJaMzI/edit?usp=sharing).
+
+## Tuskegee Experiement of Untreated Syphillis
+
+You should explore more information about our disucssion.
+
+One place to start is here: "The Tuskegee Experiment: Crash Course Black American History #29" in the video below:
+
+<center>
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/56gqCXlUCoE" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen>
+
+</iframe>
+
+</center>
+
+### **Next up**: Week 2

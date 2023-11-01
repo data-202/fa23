@@ -1,0 +1,21 @@
+---
+title: "Paper 3"
+format: 
+  html: default
+---
+
+For review, you may also refer to *more information for course papers* in two additional documents:
+
+-   [Instructions for papers](https://docs.google.com/document/d/1Qsswuu50PXcPePPTTNSDLrHYJb7IX6f8x26J63e2beA/edit?usp=sharing)
+
+-   [More information for course papers](https://docs.google.com/document/d/1JNFSQAkIqLzJeR1ZFdfFcBbWPE3m1MwbLvjdtuJaMzI/edit?usp=sharing)
+
+# Step 1: Theory and logic diagram
+
+For paper #3, we are interested in exploring theories pertaining to the relationship between two aggregate variables. Specifically, we are interested in understanding the association of characteristics.
+
+*Note: For your paper, please remember to address the theoretical relationship that the literature has identified between the conceptual variables selected. That is, before describing the measures and the survey you will be using, explain your theory and why you think that your independent variable is having an effect on your dependent variable.*
+
+# Step 2: Variables, Measurement, Hypothesis
+
+Our goal in paper #2 is to empirically test a hypothesis on a bivariate relationship.
