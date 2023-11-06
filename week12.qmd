@@ -1,0 +1,121 @@
+---
+title: "DATA 202 - Week 12"
+subtitle: "Bivariate regression analysis (part b)"
+author: "Nathan Alexander, PhD"
+institute: "Center for Applied Data Science and Analytics"
+format: 
+  html: default
+  revealjs:
+    output-file: week12-slides.html
+    height: 900
+    width: 1600
+    smaller: false
+    scrollable: true
+    slide-number: c/t #< collapsed/total
+    logo: "img/howard-logo.jpg"
+    footer: "[Course Data GitHub](https://github.com/data-202)"
+    toc: false
+    theme: simple
+    echo: true
+    incremental: false
+---
+
+
+## Part I: Context
+
+## Part II: Content
+
+## Part III: Code
+
+Below, we will run through an entire analysis using the `gssr` package.
+
+```{r}
+#| echo: true
+#| output: false
+#| warning: false
+# install packages
+install.packages("remotes", repos = "http://cran.us.r-project.org")
+install.packages("tidyverse", repos = "http://cran.us.r-project.org")
+install.packages("tidyr", repos = "http://cran.us.r-project.org")
+
+# load gssr package
+remotes::install_github("kjhealy/gssr")
+
+# load libraries
+library(gssr)
+library(dplyr)
+library(tidyr)
+```
+
+#### Explore variables in the GSSR documentation file
+
+```{r}
+#| echo: true
+#| output: true
+#| warning: false
+# load the master documentation files
+data(gss_all) # note that this is a large file of all GSS data
+data(gss_doc) # this is the documentation for the GSS data
+
+# check which years your variables are available
+gss_which_years(gss_all, race)
+
+# view information on a specific variable
+gss_doc %>% filter(id == "race") %>% 
+  select(id, description, text)
+
+gss_doc %>% filter(id == "sex") %>% 
+  select(id, description, text)
+
+gss_doc %>% filter(id == "hrs2") %>% 
+  select(id, description, text)
+
+gss_doc %>% filter(id == "educ") %>% 
+  select(id, description, text)
+```
+
+#### Use the GSSR dictionary documentation
+
+```{r}
+#| echo: true
+#| output: true
+#| warning: false
+# use the dictionary to get information in a different format
+data(gss_dict)
+gss_dict
+gss_dict %>% 
+  filter(variable == "race")
+gss_dict %>% 
+  filter(variable == "sex")
+gss_dict %>% 
+  filter(variable == "hrs2")
+gss_dict %>% 
+  filter(variable == "educ")
+```
+
+```{r}
+#| echo: true
+#| output: true
+#| warning: false
+
+
+```
+
+
+
+```{r}
+#| echo: true
+#| output: true
+#| warning: false
+
+```
+
+
+```{r}
+#| echo: true
+#| output: true
+#| warning: false
+
+```
+
+

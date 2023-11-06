@@ -1062,5 +1062,40 @@
     "title": "DATA 202 - Week 10",
     "section": "",
     "text": "The midterm examination can be found on our course canvas site here."
+  },
+  {
+    "objectID": "week12.html#part-ii-content",
+    "href": "week12.html#part-ii-content",
+    "title": "DATA 202 - Week 12",
+    "section": "Part II: Content",
+    "text": "Part II: Content"
+  },
+  {
+    "objectID": "week12.html#part-iii-code",
+    "href": "week12.html#part-iii-code",
+    "title": "DATA 202 - Week 12",
+    "section": "Part III: Code",
+    "text": "Part III: Code\nBelow, we will run through an entire analysis using the gssr package.\n\n# install packages\ninstall.packages(\"remotes\", repos = \"http://cran.us.r-project.org\")\ninstall.packages(\"tidyverse\", repos = \"http://cran.us.r-project.org\")\ninstall.packages(\"tidyr\", repos = \"http://cran.us.r-project.org\")\n\n# load gssr package\nremotes::install_github(\"kjhealy/gssr\")\n\n# load libraries\nlibrary(gssr)\nlibrary(dplyr)\nlibrary(tidyr)\n\n\nExplore variables in the GSSR documentation file\n\n# load the master documentation files\ndata(gss_all) # note that this is a large file of all GSS data\ndata(gss_doc) # this is the documentation for the GSS data\n\n# check which years your variables are available\ngss_which_years(gss_all, race)\n\n# A tibble: 33 × 2\n    year race \n   &lt;dbl&gt; &lt;lgl&gt;\n 1  1972 TRUE \n 2  1973 TRUE \n 3  1974 TRUE \n 4  1975 TRUE \n 5  1976 TRUE \n 6  1977 TRUE \n 7  1978 TRUE \n 8  1980 TRUE \n 9  1982 TRUE \n10  1983 TRUE \n# ℹ 23 more rows\n\n# view information on a specific variable\ngss_doc %&gt;% filter(id == \"race\") %&gt;% \n  select(id, description, text)\n\n# A tibble: 1 × 3\n  id    description        text                                   \n  &lt;chr&gt; &lt;chr&gt;              &lt;chr&gt;                                  \n1 race  Race of respondent 24. What race do you consider yourself?\n\ngss_doc %&gt;% filter(id == \"sex\") %&gt;% \n  select(id, description, text)\n\n# A tibble: 1 × 3\n  id    description     text                     \n  &lt;chr&gt; &lt;chr&gt;           &lt;chr&gt;                    \n1 sex   Respondents sex 23. Code respondent's sex\n\ngss_doc %&gt;% filter(id == \"hrs2\") %&gt;% \n  select(id, description, text)\n\n# A tibble: 1 × 3\n  id    description                         text                                \n  &lt;chr&gt; &lt;chr&gt;                               &lt;chr&gt;                               \n1 hrs2  Number of hours usually work a week 1b. If with a job, but not at work:…\n\ngss_doc %&gt;% filter(id == \"educ\") %&gt;% \n  select(id, description, text)\n\n# A tibble: 1 × 3\n  id    description                      text                                   \n  &lt;chr&gt; &lt;chr&gt;                            &lt;chr&gt;                                  \n1 educ  Highest year of school completed 15. What is the highest grade in eleme…\n\n\n\n\nUse the GSSR dictionary documentation\n\n# use the dictionary to get information in a different format\ndata(gss_dict)\ngss_dict\n\n# A tibble: 2,469 × 6\n     pos variable label                           col_type value_labels years   \n   &lt;int&gt; &lt;chr&gt;    &lt;chr&gt;                           &lt;chr&gt;    &lt;chr&gt;        &lt;list&gt;  \n 1     1 wrkstat  labor force status              dbl+lbl  [1] working… &lt;tibble&gt;\n 2     2 hrs1     number of hours worked last we… dbl+lbl  [89] 80+ ho… &lt;tibble&gt;\n 3     3 hrs2     number of hours usually work a… dbl+lbl  [89] 80+ ho… &lt;tibble&gt;\n 4     4 evwork   ever work as long as one year   dbl+lbl  [1] yes; [2… &lt;tibble&gt;\n 5     5 wrkslf   r self-emp or works for somebo… dbl+lbl  [1] self-em… &lt;tibble&gt;\n 6     6 wrkgovt  govt or private employee        dbl+lbl  [1] governm… &lt;tibble&gt;\n 7     7 indus80  r's industry code (1980)        dbl+lbl  [1] strongl… &lt;tibble&gt;\n 8     8 occ10    r's census occupation code (20… dbl+lbl  [10] chief … &lt;tibble&gt;\n 9     9 indus10  r's industry code (naics 2007)  dbl+lbl  [170] crop … &lt;tibble&gt;\n10    10 marital  marital status                  dbl+lbl  [1] married… &lt;tibble&gt;\n# ℹ 2,459 more rows\n\ngss_dict %&gt;% \n  filter(variable == \"race\")\n\n# A tibble: 1 × 6\n    pos variable label              col_type value_labels               years   \n  &lt;int&gt; &lt;chr&gt;    &lt;chr&gt;              &lt;chr&gt;    &lt;chr&gt;                      &lt;list&gt;  \n1    71 race     race of respondent dbl+lbl  [1] white; [2] black; [3]… &lt;tibble&gt;\n\ngss_dict %&gt;% \n  filter(variable == \"sex\")\n\n# A tibble: 1 × 6\n    pos variable label           col_type value_labels         years            \n  &lt;int&gt; &lt;chr&gt;    &lt;chr&gt;           &lt;chr&gt;    &lt;chr&gt;                &lt;list&gt;           \n1    70 sex      respondents sex dbl+lbl  [1] male; [2] female &lt;tibble [33 × 2]&gt;\n\ngss_dict %&gt;% \n  filter(variable == \"hrs2\")\n\n# A tibble: 1 × 6\n    pos variable label                            col_type value_labels years   \n  &lt;int&gt; &lt;chr&gt;    &lt;chr&gt;                            &lt;chr&gt;    &lt;chr&gt;        &lt;list&gt;  \n1     3 hrs2     number of hours usually work a … dbl+lbl  [89] 80+ ho… &lt;tibble&gt;\n\ngss_dict %&gt;% \n  filter(variable == \"educ\")\n\n# A tibble: 1 × 6\n    pos variable label                            col_type value_labels years   \n  &lt;int&gt; &lt;chr&gt;    &lt;chr&gt;                            &lt;chr&gt;    &lt;chr&gt;        &lt;list&gt;  \n1    39 educ     highest year of school completed dbl+lbl  [0] no form… &lt;tibble&gt;"
+  },
+  {
+    "objectID": "week12-slides.html#part-i-context",
+    "href": "week12-slides.html#part-i-context",
+    "title": "DATA 202 - Week 12",
+    "section": "Part I: Context",
+    "text": "Part I: Context"
+  },
+  {
+    "objectID": "week12-slides.html#part-ii-content",
+    "href": "week12-slides.html#part-ii-content",
+    "title": "DATA 202 - Week 12",
+    "section": "Part II: Content",
+    "text": "Part II: Content"
+  },
+  {
+    "objectID": "week12-slides.html#part-iii-code",
+    "href": "week12-slides.html#part-iii-code",
+    "title": "DATA 202 - Week 12",
+    "section": "Part III: Code",
+    "text": "Part III: Code\nBelow, we will run through an entire analysis using the gssr package.\n\n# install packages\ninstall.packages(\"remotes\", repos = \"http://cran.us.r-project.org\")\ninstall.packages(\"tidyverse\", repos = \"http://cran.us.r-project.org\")\ninstall.packages(\"tidyr\", repos = \"http://cran.us.r-project.org\")\n\n# load gssr package\nremotes::install_github(\"kjhealy/gssr\")\n\n# load libraries\nlibrary(gssr)\nlibrary(dplyr)\nlibrary(tidyr)\n\n\n# load the master documentation file\ndata(gss_doc)\n\n# view information on a specific variable\ngss_doc %&gt;% filter(id == \"race\") %&gt;% \n  select(id, description, text)\n\n# A tibble: 1 × 3\n  id    description        text                                   \n  &lt;chr&gt; &lt;chr&gt;              &lt;chr&gt;                                  \n1 race  Race of respondent 24. What race do you consider yourself?\n\ngss_doc %&gt;% filter(id == \"sex\") %&gt;% \n  select(id, description, text)\n\n# A tibble: 1 × 3\n  id    description     text                     \n  &lt;chr&gt; &lt;chr&gt;           &lt;chr&gt;                    \n1 sex   Respondents sex 23. Code respondent's sex\n\ngss_doc %&gt;% filter(id == \"hrs2\") %&gt;% \n  select(id, description, text)\n\n# A tibble: 1 × 3\n  id    description                         text                                \n  &lt;chr&gt; &lt;chr&gt;                               &lt;chr&gt;                               \n1 hrs2  Number of hours usually work a week 1b. If with a job, but not at work:…\n\ngss_doc %&gt;% filter(id == \"sei10\") %&gt;% \n  select(id, description, text)\n\n# A tibble: 1 × 3\n  id    description                    text \n  &lt;chr&gt; &lt;chr&gt;                          &lt;chr&gt;\n1 sei10 R's socioeconomic index (2010) None \n\n\n\n\n\nCourse Data GitHub"
   }
 ]
