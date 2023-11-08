@@ -23,11 +23,113 @@ format:
 
 ## Part I: Context
 
+This week we focus on the General Social Survey data, or GSS. 
+
+![General Social Survey](img/wk12-a-1.png)
+
+This data is located in the `gssr` package in R (see part III). You should become very familiar with the GSS data. Please explore the [website](https://gss.norc.org/) as we will be prioritizing the use of the GSS data for the remainder of our course.
+
+The use of the GSS data will allow us to consider the meaning of *social justice* in the context of attitudes and beliefs around social issues.
+
+---
+
 ## Part II: Content
+
+Let us begin with a set of three variables: $x$, $y$, and $z$.
+
+We will assume that there is a hypothesized association between all three variables.
+
+```{r}
+#| echo: false
+#| output: false
+#| warning: false
+## Sample outline of a bivariate regression analysis
+
+# Generate sample data
+set.seed(400)
+x <- rnorm(100)
+y <- 2 + -3*x^2 + rnorm(100)
+z <- -4 + 3*x - rnorm(100)
+```
+
+---
+
+Let us take a look at the scatterplots between each pair of variables.
+
+```{r}
+#| echo: true
+#| output: true
+#| warning: false
+plot(x, y)
+cor(x, y)
+```
+
+Take note of the value of the correlation coefficient.
+
+---
+
+Let us take a look at the scatterplots between each pair of variables.
+
+```{r}
+#| echo: true
+#| output: true
+#| warning: false
+plot(x, z)
+cor(x, z)
+```
+
+Take note of the value of the correlation coefficient.
+
+---
+
+Let us take a look at the scatterplots between each pair of variables.
+
+```{r}
+#| echo: true
+#| output: true
+#| warning: false
+plot(y, z)
+cor(y, z)
+```
+
+Take note of the value of the correlation coefficient.
+
+---
+
+### Regression assumptions
+
+In our previous lectures, we have discussed the function of assumptions and principles in regression analysis. In progressing towards different types of tests, it is important to consider the specific assumptions for any given test.
+
+Analyzing relationships among social science variables has an assumptions of linearity. However, this assumptions is not always correct. The adoption of this assumption is based on a host of factors. Most notably, that many relationships have been found to be linear when considered in the empirical sense.
+
+Some additional assumptions are as follows:
+
+- The sample is representative of the population 
+
+- The variables of interest are normally distributed
+
+- There are no outliers in the data
+
+- Independence
+
+- There is a linear relationship between the independent variable(s) and dependent variable(s)
+
+
+---
+
+# Robust regression analysis
+
+```{r}
+summary(ols <- lm(y ~ x + z))
+```
+
+---
 
 ## Part III: Code
 
-Below, we will run through an entire analysis using the `gssr` package.
+---
+
+We will run through a sample analysis using the `gssr` package.
 
 ```{r}
 #| echo: true
@@ -47,6 +149,8 @@ library(dplyr)
 library(tidyr)
 ```
 
+---
+
 #### Explore variables in the GSSR documentation file
 
 ```{r}
@@ -56,23 +160,9 @@ library(tidyr)
 # load the master documentation files
 data(gss_all) # note that this is a large file of all GSS data
 data(gss_doc) # this is the documentation for the GSS data
-
-# check which years your variables are available
-gss_which_years(gss_all, race)
-
-# view information on a specific variable
-gss_doc %>% filter(id == "race") %>% 
-  select(id, description, text)
-
-gss_doc %>% filter(id == "sex") %>% 
-  select(id, description, text)
-
-gss_doc %>% filter(id == "hrs2") %>% 
-  select(id, description, text)
-
-gss_doc %>% filter(id == "educ") %>% 
-  select(id, description, text)
 ```
+
+---
 
 #### Use the GSSR dictionary documentation
 
@@ -93,29 +183,255 @@ gss_dict %>%
   filter(variable == "educ")
 ```
 
+---
+
+#### View information on a specific variable
+
+```{r}
+# view information on a specific variable
+gss_doc %>% filter(id == "race") %>% 
+  select(id, description, text)
+
+gss_doc %>% filter(id == "sex") %>% 
+  select(id, description, text)
+
+gss_doc %>% filter(id == "hrs2") %>% 
+  select(id, description, text)
+
+gss_doc %>% filter(id == "educ") %>% 
+  select(id, description, text)
+```
+
+---
+
+#### Examine the years available for any given variable
+
+```{r}
+# check which years your variables are available
+gss_which_years(gss_all, race)
+gss_which_years(gss_all, sex)
+gss_which_years(gss_all, hrs2)
+gss_which_years(gss_all, educ)
+
+# when you want to return information for multiple variables
+gss_all %>%
+  gss_which_years(c(race, sex, hrs2, educ)) %>%
+  print(n = Inf)
+```
+
+---
+
 ```{r}
 #| echo: true
 #| output: true
 #| warning: false
-
-
+# get information on the properties of the data
+gss_get_props(varnames = c("race", "sex", "hrs1", "educ"))
 ```
 
-
+---
 
 ```{r}
 #| echo: true
 #| output: true
 #| warning: false
-
+# loading single year data
+gss12 <- gss_get_yr(2012)
 ```
 
+---
 
 ```{r}
 #| echo: true
 #| output: true
 #| warning: false
+# loading panel data by year (not necessary for our course)
+data(gss_panel08_long) # 2008 three wave panel data (2008, 2010, 2012)
+data(gss_panel_doc) # loading panel documentation
+```
 
+---
+
+```{r}
+#| echo: true
+#| output: true
+#| warning: false
+# select your variables for a single year using cross sectional file
+gss12 %>% 
+  select(race, sex, hrs2, educ, wtssall)
+
+gss12 %>% 
+  select(race, sex, hrs2, educ, wtssall) %>% 
+  count(race, sex, wtssall)
+```
+
+---
+
+# Get data via `gss_all` data set
+
+We can use a more direct method but we must be careful about our outputs.
+
+```{r}
+#| echo: true
+#| output: true
+#| warning: false
+gss_all %>% 
+  select(year, race, sex, hrs2, educ, wtssall, wtss, wtssnr) %>% 
+  filter(year == 2014) %>% 
+  drop_na() -> df
+
+sapply(df, function(x) sum(is.na(x))) # take note that the hrs2 variable will cause issue
+df
+```
+
+---
+
+```{r}
+# run your model and diagnostic plots
+model2 <- lm(df$educ ~ df$hrs2)
+summary(model2)
+# Plot the regression line
+plot(df$educ, df$hrs2)
+abline(model2, col="blue")
+# Check residuals
+resids2 <- residuals(model2)
+plot(df$educ, resids2)
+# Diagnostic plots
+par(mfrow=c(2,2))
+plot(model2)
+# Check significance of predictor
+anova(model2)
 ```
 
 
+---
+
+```{r}
+#| echo: true
+#| output: true
+#| warning: false
+# select your variables for a single year using gss_all
+gss_all %>% 
+  filter(year == 2012) %>% 
+  select(race, sex, hrs2, educ, wtssall, wtss, wtssnr)
+
+gss_all %>% 
+  filter(year == 2018) %>% 
+  select(race, sex, hrs2, educ, wtssall, wtss, wtssnr)
+```
+
+
+---
+
+#### Cleaning data
+
+```{r}
+#| echo: true
+#| output: true
+#| warning: false
+# clean data for analysis
+gss12 %>% 
+  select(race, sex, hrs2, educ, wtssall, wtss, wtssnr) %>% 
+  drop_na() -> gss12_analysis
+```
+
+---
+
+```{r}
+#| echo: true
+#| output: true
+#| warning: false
+# check for missing values
+sapply(gss12_analysis, function(x) sum(is.na(x)))
+str(gss12_analysis)
+```
+
+
+---
+
+```{r}
+#| echo: true
+#| output: true
+#| warning: false
+# exploratory analysis
+gss12 %>% 
+  select(race, sex, hrs2, educ, wtssall, wtss, wtssnr) %>% 
+  count(race, sex)
+
+gss12_analysis %>% 
+  count(race, sex)
+```
+
+
+---
+
+```{r}
+#| echo: true
+#| output: true
+#| warning: false
+model <- lm(gss12_analysis$hrs2 ~ gss12_analysis$educ, weight = gss12_analysis$wtssall)
+summary(model)
+```
+
+
+---
+
+# Plot the variable relationships 
+
+```{r}
+#| echo: true
+#| output: true
+#| warning: false
+# Plot the regression line
+plot(gss12_analysis$educ, gss12_analysis$hrs2)
+abline(model, col="blue")
+```
+
+---
+
+# Examine residuals
+
+```{r}
+#| echo: true
+#| output: true
+#| warning: false
+# Check residuals
+resids <- residuals(model)
+plot(gss12_analysis$hrs2, resids)
+
+```
+
+---
+
+```{r}
+#| echo: true
+#| output: true
+#| warning: false
+# Diagnostic plots
+par(mfrow=c(2,2))
+plot(model)
+```
+
+---
+
+```{r}
+#| echo: true
+#| output: true
+#| warning: false
+# Check significance of predictor
+anova(model)
+```
+
+---
+
+# Preview of multivariate analysis
+
+Try to examine the assumptions of the multivariate analysis and model below.
+
+```{r}
+## conducting a multivariate linear analysis
+mlm1 <- lm(cbind(hrs2, educ) ~ race + sex, data = df, weight = wtssall)
+summary(mlm1)
+```
+
+#### Next up: Week 13
