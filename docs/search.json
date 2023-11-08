@@ -1061,7 +1061,7 @@
     "href": "week12-slides.html#part-i-context",
     "title": "DATA 202 - Week 12",
     "section": "Part I: Context",
-    "text": "Part I: Context"
+    "text": "Part I: Context\nThis week we focus on the General Social Survey data, or GSS.\n\nGeneral Social SurveyThis data is located in the gssr package in R (see part III). You should become very familiar with the GSS data. Please explore the website as we will be prioritizing the use of the GSS data for the remainder of our course.\nThe use of the GSS data will allow us to consider the meaning of social justice in the context of attitudes and beliefs around social issues."
   },
   {
     "objectID": "week12-slides.html#part-ii-content",
