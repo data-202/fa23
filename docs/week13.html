@@ -1,0 +1,2005 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang="en" xml:lang="en"><head>
+
+<meta charset="utf-8">
+<meta name="generator" content="quarto-1.3.433">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+
+<meta name="author" content="Nathan Alexander, PhD">
+
+<title>DATA 202: Statistically Measuring and Modeling Social Justice - DATA 202 - Week 13</title>
+<style>
+code{white-space: pre-wrap;}
+span.smallcaps{font-variant: small-caps;}
+div.columns{display: flex; gap: min(4vw, 1.5em);}
+div.column{flex: auto; overflow-x: auto;}
+div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+ul.task-list{list-style: none;}
+ul.task-list li input[type="checkbox"] {
+  width: 0.8em;
+  margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
+  vertical-align: middle;
+}
+/* CSS for syntax highlighting */
+pre > code.sourceCode { white-space: pre; position: relative; }
+pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+pre > code.sourceCode > span:empty { height: 1.2em; }
+.sourceCode { overflow: visible; }
+code.sourceCode > span { color: inherit; text-decoration: inherit; }
+div.sourceCode { margin: 1em 0; }
+pre.sourceCode { margin: 0; }
+@media screen {
+div.sourceCode { overflow: auto; }
+}
+@media print {
+pre > code.sourceCode { white-space: pre-wrap; }
+pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+}
+pre.numberSource code
+  { counter-reset: source-line 0; }
+pre.numberSource code > span
+  { position: relative; left: -4em; counter-increment: source-line; }
+pre.numberSource code > span > a:first-child::before
+  { content: counter(source-line);
+    position: relative; left: -1em; text-align: right; vertical-align: baseline;
+    border: none; display: inline-block;
+    -webkit-touch-callout: none; -webkit-user-select: none;
+    -khtml-user-select: none; -moz-user-select: none;
+    -ms-user-select: none; user-select: none;
+    padding: 0 4px; width: 4em;
+  }
+pre.numberSource { margin-left: 3em;  padding-left: 4px; }
+div.sourceCode
+  {   }
+@media screen {
+pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+}
+</style>
+
+
+<script src="site_libs/quarto-nav/quarto-nav.js"></script>
+<script src="site_libs/clipboard/clipboard.min.js"></script>
+<script src="site_libs/quarto-search/autocomplete.umd.js"></script>
+<script src="site_libs/quarto-search/fuse.min.js"></script>
+<script src="site_libs/quarto-search/quarto-search.js"></script>
+<meta name="quarto:offset" content="./">
+<script src="site_libs/quarto-html/quarto.js"></script>
+<script src="site_libs/quarto-html/popper.min.js"></script>
+<script src="site_libs/quarto-html/tippy.umd.min.js"></script>
+<script src="site_libs/quarto-html/anchor.min.js"></script>
+<link href="site_libs/quarto-html/tippy.css" rel="stylesheet">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-text-highlighting-styles">
+<link href="site_libs/quarto-html/quarto-syntax-highlighting-dark.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-text-highlighting-styles">
+<script src="site_libs/bootstrap/bootstrap.min.js"></script>
+<link href="site_libs/bootstrap/bootstrap-icons.css" rel="stylesheet">
+<link href="site_libs/bootstrap/bootstrap.min.css" rel="stylesheet" class="quarto-color-scheme" id="quarto-bootstrap" data-mode="light">
+<link href="site_libs/bootstrap/bootstrap-dark.min.css" rel="prefetch" class="quarto-color-scheme quarto-color-alternate" id="quarto-bootstrap" data-mode="light">
+<script id="quarto-search-options" type="application/json">{
+  "location": "sidebar",
+  "copy-button": false,
+  "collapse-after": 3,
+  "panel-placement": "start",
+  "type": "textbox",
+  "limit": 20,
+  "language": {
+    "search-no-results-text": "No results",
+    "search-matching-documents-text": "matching documents",
+    "search-copy-link-title": "Copy link to search",
+    "search-hide-matches-text": "Hide additional matches",
+    "search-more-match-text": "more match in this document",
+    "search-more-matches-text": "more matches in this document",
+    "search-clear-button-title": "Clear",
+    "search-detached-cancel-button-title": "Cancel",
+    "search-submit-button-title": "Submit",
+    "search-label": "Search"
+  }
+}</script>
+
+
+<meta property="og:title" content="DATA 202: Statistically Measuring and Modeling Social Justice - DATA 202 - Week 13">
+<meta property="og:description" content="Multivariate analysis">
+<meta property="og:image" content="https://github.com/data-202/img/wk13-a-1.png">
+<meta property="og:site-name" content="DATA 202: Statistically Measuring and Modeling Social Justice">
+<meta property="og:image:height" content="237">
+<meta property="og:image:width" content="612">
+<meta name="twitter:title" content="DATA 202: Statistically Measuring and Modeling Social Justice - DATA 202 - Week 13">
+<meta name="twitter:description" content="Multivariate analysis">
+<meta name="twitter:image" content="https://github.com/data-202/img/wk13-a-1.png">
+<meta name="twitter:creator" content="@professornaite">
+<meta name="twitter:image-height" content="237">
+<meta name="twitter:image-width" content="612">
+<meta name="twitter:card" content="summary_large_image">
+</head>
+
+<body class="nav-sidebar docked">
+
+<div id="quarto-search-results"></div>
+  <header id="quarto-header" class="headroom fixed-top">
+  <nav class="quarto-secondary-nav">
+    <div class="container-fluid d-flex">
+      <button type="button" class="quarto-btn-toggle btn" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">
+        <i class="bi bi-layout-text-sidebar-reverse"></i>
+      </button>
+      <nav class="quarto-page-breadcrumbs" aria-label="breadcrumb"><ol class="breadcrumb"><li class="breadcrumb-item">DATA 202 - Week 13</li></ol></nav>
+      <a class="flex-grow-1" role="button" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass" aria-controls="quarto-sidebar" aria-expanded="false" aria-label="Toggle sidebar navigation" onclick="if (window.quartoToggleHeadroom) { window.quartoToggleHeadroom(); }">      
+      </a>
+      <button type="button" class="btn quarto-search-button" aria-label="" onclick="window.quartoOpenSearch();">
+        <i class="bi bi-search"></i>
+      </button>
+    </div>
+  </nav>
+</header>
+<!-- content -->
+<div id="quarto-content" class="quarto-container page-columns page-rows-contents page-layout-article">
+<!-- sidebar -->
+  <nav id="quarto-sidebar" class="sidebar collapse collapse-horizontal sidebar-navigation docked overflow-auto">
+    <div class="pt-lg-2 mt-2 text-center sidebar-header">
+      <a href="./index.html" class="sidebar-logo-link">
+      <img src="./img/dubois-loc.jpg" alt="" class="sidebar-logo py-0 d-lg-inline d-none">
+      </a>
+      <div class="sidebar-tools-main tools-wide">
+    <a href="https://data-202.github.io/fa23" rel="" title="GitHub organization" class="quarto-navigation-tool px-1" aria-label="GitHub organization"><i class="bi bi-github"></i></a>
+    <a href="https://canvas.howard.edu/courses/40683" rel="" title="Canvas site" class="quarto-navigation-tool px-1" aria-label="Canvas site"><i class="bi bi-code-square"></i></a>
+  <a href="" class="quarto-color-scheme-toggle quarto-navigation-tool  px-1" onclick="window.quartoToggleColorScheme(); return false;" title="Toggle dark mode"><i class="bi"></i></a>
+</div>
+      </div>
+        <div class="mt-2 flex-shrink-0 align-items-center">
+        <div class="sidebar-search">
+        <div id="quarto-search" class="" title="Search"></div>
+        </div>
+        </div>
+    <div class="sidebar-menu-container"> 
+    <ul class="list-unstyled mt-1">
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false">
+ <span class="menu-text">Course information</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-1" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-1" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./index.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Course landing page</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./course-overview.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Overview</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./assignments.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Assignments</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./computing.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Computing</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./schedule.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Schedule</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false">
+ <span class="menu-text">Weekly materials</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-2" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-2" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 3</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week4.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 4</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week5.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 5</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week6.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 6</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week7.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 7</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week8.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 8</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week9.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 9</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week10.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 10</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week11.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 11</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./week12.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Week 12</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+        <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false">
+ <span class="menu-text">Appendix</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-3" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-3" class="collapse list-unstyled sidebar-section depth1 ">  
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false">
+ <span class="menu-text">Homeworks</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-4" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-4" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./hw/hw1.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">HW 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./hw/hw2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">HW 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./hw/hw3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">HW 3</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false">
+ <span class="menu-text">Labs</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-5" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-5" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./labs/lab1.qmd" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./labs/lab2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./labs/lab3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Lab 3</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item sidebar-item-section">
+      <div class="sidebar-item-container"> 
+            <a class="sidebar-item-text sidebar-link text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false">
+ <span class="menu-text">Papers</span></a>
+          <a class="sidebar-item-toggle text-start collapsed" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar-section-6" aria-expanded="false" aria-label="Toggle section">
+            <i class="bi bi-chevron-right ms-2"></i>
+          </a> 
+      </div>
+      <ul id="quarto-sidebar-section-6" class="collapse list-unstyled sidebar-section depth2 ">  
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./papers/annotated.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Paper 1</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./papers/paper2.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Paper 2</span></a>
+  </div>
+</li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./papers/paper3.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Paper 3</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+          <li class="sidebar-item">
+  <div class="sidebar-item-container"> 
+  <a href="./solutions.html" class="sidebar-item-text sidebar-link">
+ <span class="menu-text">Solutions</span></a>
+  </div>
+</li>
+      </ul>
+  </li>
+    </ul>
+    </div>
+</nav>
+<div id="quarto-sidebar-glass" data-bs-toggle="collapse" data-bs-target="#quarto-sidebar,#quarto-sidebar-glass"></div>
+<!-- margin-sidebar -->
+    <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
+        <nav id="TOC" role="doc-toc" class="toc-active">
+    <h2 id="toc-title">On this page</h2>
+   
+  <ul>
+  <li><a href="#part-i-context" id="toc-part-i-context" class="nav-link active" data-scroll-target="#part-i-context">Part I: Context</a>
+  <ul class="collapse">
+  <li><a href="#framing-social-justice" id="toc-framing-social-justice" class="nav-link" data-scroll-target="#framing-social-justice">Framing social justice</a></li>
+  <li><a href="#understanding-social-justice" id="toc-understanding-social-justice" class="nav-link" data-scroll-target="#understanding-social-justice">Understanding social justice</a></li>
+  </ul></li>
+  <li><a href="#part-ii-content" id="toc-part-ii-content" class="nav-link" data-scroll-target="#part-ii-content">Part II: Content</a></li>
+  <li><a href="#multivariable-vs.-multivariate" id="toc-multivariable-vs.-multivariate" class="nav-link" data-scroll-target="#multivariable-vs.-multivariate">Multivariable vs.&nbsp;Multivariate</a>
+  <ul class="collapse">
+  <li><a href="#examples-of-multivariate-analysis-techniques" id="toc-examples-of-multivariate-analysis-techniques" class="nav-link" data-scroll-target="#examples-of-multivariate-analysis-techniques">Examples of multivariate analysis techniques</a></li>
+  </ul></li>
+  <li><a href="#part-iii-code" id="toc-part-iii-code" class="nav-link" data-scroll-target="#part-iii-code">Part III: Code</a>
+  <ul class="collapse">
+  <li><a href="#next-up-week-14" id="toc-next-up-week-14" class="nav-link" data-scroll-target="#next-up-week-14">Next up: Week 14</a></li>
+  </ul></li>
+  </ul>
+<div class="quarto-alternate-formats"><h2>Other Formats</h2><ul><li><a href="week13-slides.html"><i class="bi bi-file-slides"></i>RevealJS</a></li></ul></div></nav>
+    </div>
+<!-- main -->
+<main class="content" id="quarto-document-content">
+
+<header id="title-block-header" class="quarto-title-block default">
+<div class="quarto-title">
+<h1 class="title">DATA 202 - Week 13</h1>
+<p class="subtitle lead">Multivariate analysis</p>
+</div>
+
+
+<div class="quarto-title-meta-author">
+  <div class="quarto-title-meta-heading">Author</div>
+  <div class="quarto-title-meta-heading">Affiliation</div>
+  
+    <div class="quarto-title-meta-contents">
+    <p class="author">Nathan Alexander, PhD </p>
+  </div>
+    <div class="quarto-title-meta-contents">
+        <p class="affiliation">
+            Center for Applied Data Science and Analytics
+          </p>
+      </div>
+    </div>
+
+<div class="quarto-title-meta">
+
+      
+  
+    
+  </div>
+  
+
+</header>
+
+<section id="part-i-context" class="level2">
+<h2 class="anchored" data-anchor-id="part-i-context">Part I: Context</h2>
+<section id="framing-social-justice" class="level3">
+<h3 class="anchored" data-anchor-id="framing-social-justice">Framing social justice</h3>
+<p>Multivariate analyses may require that we consider various intersections of social justice. Namely, rather than a single lens on an issue, we may be required to take an intersectional perspective with regards to a given <em>set</em> of social issues.</p>
+<p>There are many different definitions of social justice. Through our course, we have examined different data and statistical analyses to better engage the various connections when measuring and modeling social justice. However, it is important to develop more specific ideations and frameworks as we delve deeper into our selection of various methodologies to explore data.</p>
+<p>Earlier, we considered <em>theory construction</em> as one method to examine distinct and interrelated concepts in the development of a statistical study. Theory construction, together with the importance of understanding the phenomenon of <strong>social justice</strong> requires that we review some of the key concepts and principles that can be accented by data analysis.</p>
+<p>Importantly, we generally want to prioritize theory and context before methodology.</p>
+<hr>
+</section>
+<section id="understanding-social-justice" class="level3">
+<h3 class="anchored" data-anchor-id="understanding-social-justice">Understanding social justice</h3>
+<p>When considering the different definitions of social justice, we want to consider the distinction between individual and collective frameworks for justice. This distinction allows us to explore the relationships between social issues and equality, as a foundational principle to understanding difference. However, when we consider the historical context, we are often required to extend our analyses beyond the blanket expressions for equality.</p>
+<p>Equality and equity are two concepts that are often discussed in the context of social justice and fairness. While they are related, they have distinct meanings.</p>
+<hr>
+<div class="callout callout-style-simple callout-caution no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<strong>Definitions</strong>: Equality vs.&nbsp;Equity
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Equality</strong>: Equality refers to the state of being equal, particularly in terms of rights, opportunities, and treatment. It emphasizes providing everyone with the same resources, regardless of their circumstances or needs. In other words, equality means that everyone is treated identically, without discrimination or favoritism. The goal of equality is to ensure fairness and eliminate unfair advantages or disadvantages.</p>
+<p><strong>Equity</strong>: Equity is about fairness and justice by taking into account the unique circumstances and needs of individuals, as well as the historical contexts. It recognizes that not everyone starts from the same place and that treating everyone equally may not result in true fairness. Equity aims to provide individuals with the resources and support they need to overcome systemic disadvantages and achieve equality of outcome. It involves allocating resources and opportunities based on the specific needs and circumstances of individuals or groups.</p>
+</div>
+</div>
+<p>More generally, equality focuses on treating everyone the same, while equity emphasizes fairness by addressing individual or group-specific disadvantages and providing resources accordingly. Both concepts play an important role in promoting social justice and creating a more equitable society.</p>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/wk13-a-1.png" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">A surface explanation of equality vs.&nbsp;equity. Image from NACEweb.org</figcaption>
+</figure>
+</div>
+<hr>
+<section id="principles-of-social-justice" class="level4">
+<h4 class="anchored" data-anchor-id="principles-of-social-justice">Principles of social justice</h4>
+<p>There are many ways to take a theoretical approach to social justice, and often too many to list. As a result, it may be helpful for us to consider the principles of social justice as a framework to adapt your specific analyses (using real-world data) and your theoretical framework to a subset of these principles.</p>
+<table class="table-striped table-hover table">
+<caption>Principles of social justice</caption>
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Principle</th>
+<th>Component 1</th>
+<th>Component 2</th>
+<th>Component 3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Fairness</td>
+<td>Equal opportunity</td>
+<td>Systemic disadvantage</td>
+<td>Reducing inequality</td>
+</tr>
+<tr class="even">
+<td>Solidarity</td>
+<td>Social cohesion</td>
+<td>Self-determination</td>
+<td>Collective responsibility</td>
+</tr>
+<tr class="odd">
+<td>Dignity</td>
+<td>Human rights</td>
+<td>Worth of all</td>
+<td>Combating marginalization</td>
+</tr>
+</tbody>
+</table>
+<hr>
+</section>
+<section id="dimensions-of-social-justice" class="level4">
+<h4 class="anchored" data-anchor-id="dimensions-of-social-justice">Dimensions of social justice</h4>
+<p>Just as there are many theoretical entry points to social justice, there are also dimensional components that may be used to help focus your analysis. These dimensions help to clarify the specific principles noted above in a more concrete way. Importantly, these principles and dimensions are neither rigid or fixed.</p>
+<table class="table-striped table-hover table">
+<caption>Dimensions of social justice</caption>
+<colgroup>
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+<col style="width: 25%">
+</colgroup>
+<thead>
+<tr class="header">
+<th>Dimension</th>
+<th>Component 1</th>
+<th>Component 2</th>
+<th>Component 3</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>Economic</td>
+<td>Poverty and income inequality</td>
+<td>Fair distribution of resources and wealth</td>
+<td>Access to education, employment, healthcare</td>
+</tr>
+<tr class="even">
+<td>Environmental</td>
+<td>Protecting and preserving the environment</td>
+<td>Mitigating environmental degradation</td>
+<td>Ensuring equitable access to natural resources</td>
+</tr>
+<tr class="odd">
+<td>Racial and ethnic</td>
+<td>Combating racism and discrimination</td>
+<td>Promoting racial and ethnic equality</td>
+<td>Recognizing and valuing cultural diversity</td>
+</tr>
+<tr class="even">
+<td>Gender and LGBTQ+</td>
+<td>Achieving gender equality and empowerment</td>
+<td>Addressing discrimination based on sexuality or gender expression</td>
+<td>Ensuring equal rights for all genders</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<div class="quarto-figure quarto-figure-center">
+<figure class="figure">
+<p><img src="img/wk13-a-2.jpg" class="img-fluid figure-img"></p>
+<figcaption class="figure-caption">A sample framework for racial justice in education. Image from NEA.org</figcaption>
+</figure>
+</div>
+<hr>
+</section>
+<section id="strategies-to-promote-social-justice" class="level4">
+<h4 class="anchored" data-anchor-id="strategies-to-promote-social-justice">Strategies to promote social justice</h4>
+<p>As you consider the various principles and dimensions in your theoretical framing of a particular social issue, data can be used as a method to promote social justice by examining attitudes around the various principles and dimensions (e.g., consider variables in the GSS data), examining real-world data on issues of social injustice (e.g., consider the fatal force database), and a host of other methods that center data analysis as a form of political knowledge.</p>
+<p>There are, however, specific ways to think about the implications of a particular analytical study. These methods can help to further refine the role and goals of any particular modeling of a social justice issues. Importantly, considering the various contexts to which an issue intersections is also important (i.e., global, national, and/or local).</p>
+<hr>
+<ul>
+<li><p>Advocacy and activism</p>
+<p>– Using data to raise awareness about social issues</p>
+<p>– Mobilizing for policy change with various statistical models</p>
+<p>– Supporting grassroots movements using quantitative information</p></li>
+</ul>
+<hr>
+<ul>
+<li><p>Policy interventions</p>
+<p>– Analyses to help examine and implement laws and regulations</p>
+<p>– Quantification to help redistribute resources and opportunities</p>
+<p>– Models to help inform inclusive social welfare programs</p></li>
+</ul>
+<hr>
+<ul>
+<li><p>Education and awareness</p>
+<p>– Promoting critical thinking and empathy</p>
+<p>– Incorporating social justice into curricula</p>
+<p>– Engaging in dialogue and community outreach</p>
+<p>– Calls to action for promoting a more just and equitable society</p></li>
+</ul>
+<hr>
+</section>
+</section>
+</section>
+<section id="part-ii-content" class="level2">
+<h2 class="anchored" data-anchor-id="part-ii-content">Part II: Content</h2>
+<p>Multiple Variable Analysis and Multivariate Analysis are two terms often used in statistics and research methodology to describe different approaches to analyzing data involving multiple variables. While they share similarities, there are distinct differences between these two concepts.</p>
+<hr>
+</section>
+<section id="multivariable-vs.-multivariate" class="level2">
+<h2 class="anchored" data-anchor-id="multivariable-vs.-multivariate">Multivariable vs.&nbsp;Multivariate</h2>
+<p><em>Multiple variable analysis</em> investigates the influence of individual independent variables on a single dependent variable, while <em>multivariate analysis</em> explores the relationships and patterns among multiple variables simultaneously. Multiple Variable Analysis is often used when studying the effects of specific factors, while multivariate analysis is employed to uncover broader patterns and structures within a dataset. Both approaches are valuable in data analysis, and the choice between them depends on the research objectives and the nature of the data being analyzed.</p>
+<div class="callout callout-style-simple callout-caution no-icon callout-titled">
+<div class="callout-header d-flex align-content-center">
+<div class="callout-icon-container">
+<i class="callout-icon no-icon"></i>
+</div>
+<div class="callout-title-container flex-fill">
+<strong>Definitions</strong>: Multiple variable analysis vs.&nbsp;Multivariate analysis
+</div>
+</div>
+<div class="callout-body-container callout-body">
+<p><strong>Multiple Variable Analysis</strong>: Multiple Variable Analysis refers to the process of examining the relationships between several independent variables and a single dependent variable. It aims to understand how each independent variable influences or predicts the dependent variable individually, while controlling for other variables. In this analysis, each independent variable is analyzed separately, often using techniques such as regression analysis or analysis of variance (ANOVA).</p>
+<p><strong>Multivariate Analysis</strong>: Multivariate Analysis involves the simultaneous analysis of multiple dependent and independent variables. It aims to explore the relationships and patterns among multiple variables, considering them as a whole. This analysis technique allows for the examination of complex interactions and associations between variables, providing a more comprehensive understanding of the data.</p>
+</div>
+</div>
+<hr>
+<section id="key-characteristics-of-multiple-variable-analysis" class="level4">
+<h4 class="anchored" data-anchor-id="key-characteristics-of-multiple-variable-analysis">Key characteristics of multiple variable analysis</h4>
+<ol type="1">
+<li><p><strong>Focus</strong>: Examining the impact of individual independent variables on a single dependent variable.</p></li>
+<li><p><strong>Analytic approach</strong>: Each independent variable is analyzed separately, allowing for isolation of their effects.</p></li>
+<li><p><strong>Purpose</strong>: To identify the individual contributions and significance of multiple variables in explaining the variation in the dependent variable.</p></li>
+<li><p><strong>Statistical techniques</strong>: Common techniques include simple linear regression, multiple linear regression, and ANOVA.</p></li>
+</ol>
+<hr>
+</section>
+<section id="key-characteristics-of-multivariate-analysis" class="level4">
+<h4 class="anchored" data-anchor-id="key-characteristics-of-multivariate-analysis">Key characteristics of multivariate analysis</h4>
+<ol type="1">
+<li><p><strong>Focus</strong>: Examining the relationships and interactions among multiple variables simultaneously.</p></li>
+<li><p><strong>Analytic approach</strong>: Considering all variables together, accounting for their joint effects and potential interdependence.</p></li>
+<li><p><strong>Purpose</strong>: To explore patterns, associations, and structures within the data, identifying underlying factors or dimensions.</p></li>
+<li><p><strong>Statistical techniques</strong>: Common techniques include factor analysis, principal component analysis, cluster analysis, and structural equation modeling.</p></li>
+</ol>
+<hr>
+</section>
+<section id="examples-of-multivariate-analysis-techniques" class="level3">
+<h3 class="anchored" data-anchor-id="examples-of-multivariate-analysis-techniques">Examples of multivariate analysis techniques</h3>
+<ul>
+<li><p><em>Principal component analysis (PCA)</em>: PCA is used to reduce the dimensionality of data by transforming it into a new set of uncorrelated variables called principal components. R functions for PCA include <code>prcomp()</code> and <code>princomp()</code>.</p></li>
+<li><p><em>Factor analysis</em>: Factor Analysis aims to identify latent factors that explain the correlations among observed variables. R offers functions like <code>factanal()</code> and <code>psych::fa()</code> for conducting factor analysis.</p></li>
+<li><p><em>Canonical correlation analysis (CCA)</em>: CCA examines the relationships between two sets of variables and identifies the linear combinations of each set that have maximum correlation with each other. The <code>CCA()</code> function in the stats package can be used for this analysis.</p></li>
+<li><p><em>Cluster analysis</em>: Cluster Analysis groups similar observations into clusters based on the similarity of their characteristics. R provides various clustering techniques, such as k-means clustering (<code>kmeans()</code>), hierarchical clustering (<code>hclust()</code>), and model-based clustering (<code>Mclust()</code>).</p></li>
+<li><p><em>Discriminant analysis</em>: Discriminant Analysis aims to find a linear combination of variables that maximally separate predefined groups or classes. R offers functions like <code>lda()</code> and <code>qda()</code> for performing Linear Discriminant Analysis (LDA) and Quadratic Discriminant Analysis (QDA), respectively.</p></li>
+<li><p><em>Multivariate regression</em>: Multivariate Regression extends simple linear regression to multiple response variables. The <code>lm()</code> function in R can be used for multivariate regression analysis.</p></li>
+<li><p><em>Multivariate analysis of variance (MANOVA)</em>: MANOVA extends the analysis of variance (ANOVA) to multiple response variables simultaneously. The <code>manova()</code> function in R can be used for MANOVA.</p></li>
+<li><p><em>Multidimensional scaling (MDS)</em>: MDS visualizes the similarity or dissimilarity between objects in a lower-dimensional space. R provides functions like <code>cmdscale()</code> and <code>isoMDS()</code> for performing MDS.</p></li>
+<li><p><em>Structural Equation Modeling (SEM)</em>: SEM is a comprehensive framework for testing complex relationships among variables. R packages like lavaan and sem offer functionalities for conducting SEM.</p></li>
+<li><p><em>Correspondence Analysis</em>: Correspondence Analysis explores the associations between categorical variables and visualizes them in a low-dimensional space. The <code>ca()</code> function in the ca package is commonly used for correspondence analysis.</p></li>
+</ul>
+<p>We will consider a few of these models in our final weeks for the course.</p>
+<hr>
+</section>
+</section>
+<section id="part-iii-code" class="level2">
+<h2 class="anchored" data-anchor-id="part-iii-code">Part III: Code</h2>
+<p>This week, we will run through another sample analysis using the <code>gssr</code> package.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install packages</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"remotes"</span>, <span class="at">repos =</span> <span class="st">"http://cran.us.r-project.org"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"tidyverse"</span>, <span class="at">repos =</span> <span class="st">"http://cran.us.r-project.org"</span>)</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"tidyr"</span>, <span class="at">repos =</span> <span class="st">"http://cran.us.r-project.org"</span>)</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"survey"</span>, <span class="at">repos =</span> <span class="st">"http://cran.us.r-project.org"</span>)</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="fu">install.packages</span>(<span class="st">"srvyr"</span>, <span class="at">repos =</span> <span class="st">"http://cran.us.r-project.org"</span>)</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true" tabindex="-1"></a><span class="co"># load gssr package</span></span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true" tabindex="-1"></a>remotes<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"kjhealy/gssr"</span>)</span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a><span class="co"># load libraries</span></span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(gssr)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(critstats)</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(dplyr)</span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(ggplot2)</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(haven)</span>
+<span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(tibble)</span>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(survey)</span>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a><span class="fu">library</span>(srvyr)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co"># load the data</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(gss_all)</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="fu">data</span>(gss_doc)</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="co"># find out which questions were asked in which years</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a><span class="fu">gss_which_years</span>(gss_all, educ) <span class="sc">%&gt;%</span> <span class="fu">print</span>(<span class="at">n=</span> <span class="cn">Inf</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 33 × 2
+    year educ 
+   &lt;dbl&gt; &lt;lgl&gt;
+ 1  1972 TRUE 
+ 2  1973 TRUE 
+ 3  1974 TRUE 
+ 4  1975 TRUE 
+ 5  1976 TRUE 
+ 6  1977 TRUE 
+ 7  1978 TRUE 
+ 8  1980 TRUE 
+ 9  1982 TRUE 
+10  1983 TRUE 
+11  1984 TRUE 
+12  1985 TRUE 
+13  1986 TRUE 
+14  1987 TRUE 
+15  1988 TRUE 
+16  1989 TRUE 
+17  1990 TRUE 
+18  1991 TRUE 
+19  1993 TRUE 
+20  1994 TRUE 
+21  1996 TRUE 
+22  1998 TRUE 
+23  2000 TRUE 
+24  2002 TRUE 
+25  2004 TRUE 
+26  2006 TRUE 
+27  2008 TRUE 
+28  2010 TRUE 
+29  2012 TRUE 
+30  2014 TRUE 
+31  2016 TRUE 
+32  2018 TRUE 
+33  2021 TRUE </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb4"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gss_which_years</span>(gss_all, age) <span class="sc">%&gt;%</span> <span class="fu">print</span>(<span class="at">n=</span> <span class="cn">Inf</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 33 × 2
+    year age  
+   &lt;dbl&gt; &lt;lgl&gt;
+ 1  1972 TRUE 
+ 2  1973 TRUE 
+ 3  1974 TRUE 
+ 4  1975 TRUE 
+ 5  1976 TRUE 
+ 6  1977 TRUE 
+ 7  1978 TRUE 
+ 8  1980 TRUE 
+ 9  1982 TRUE 
+10  1983 TRUE 
+11  1984 TRUE 
+12  1985 TRUE 
+13  1986 TRUE 
+14  1987 TRUE 
+15  1988 TRUE 
+16  1989 TRUE 
+17  1990 TRUE 
+18  1991 TRUE 
+19  1993 TRUE 
+20  1994 TRUE 
+21  1996 TRUE 
+22  1998 TRUE 
+23  2000 TRUE 
+24  2002 TRUE 
+25  2004 TRUE 
+26  2006 TRUE 
+27  2008 TRUE 
+28  2010 TRUE 
+29  2012 TRUE 
+30  2014 TRUE 
+31  2016 TRUE 
+32  2018 TRUE 
+33  2021 TRUE </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gss_which_years</span>(gss_all, degree) <span class="sc">%&gt;%</span> <span class="fu">print</span>(<span class="at">n=</span> <span class="cn">Inf</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 33 × 2
+    year degree
+   &lt;dbl&gt; &lt;lgl&gt; 
+ 1  1972 TRUE  
+ 2  1973 TRUE  
+ 3  1974 TRUE  
+ 4  1975 TRUE  
+ 5  1976 TRUE  
+ 6  1977 TRUE  
+ 7  1978 TRUE  
+ 8  1980 TRUE  
+ 9  1982 TRUE  
+10  1983 TRUE  
+11  1984 TRUE  
+12  1985 TRUE  
+13  1986 TRUE  
+14  1987 TRUE  
+15  1988 TRUE  
+16  1989 TRUE  
+17  1990 TRUE  
+18  1991 TRUE  
+19  1993 TRUE  
+20  1994 TRUE  
+21  1996 TRUE  
+22  1998 TRUE  
+23  2000 TRUE  
+24  2002 TRUE  
+25  2004 TRUE  
+26  2006 TRUE  
+27  2008 TRUE  
+28  2010 TRUE  
+29  2012 TRUE  
+30  2014 TRUE  
+31  2016 TRUE  
+32  2018 TRUE  
+33  2021 TRUE  </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gss_which_years</span>(gss_all, wtssps) <span class="sc">%&gt;%</span> <span class="fu">print</span>(<span class="at">n=</span> <span class="cn">Inf</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 33 × 2
+    year wtssps
+   &lt;dbl&gt; &lt;lgl&gt; 
+ 1  1972 FALSE 
+ 2  1973 FALSE 
+ 3  1974 FALSE 
+ 4  1975 FALSE 
+ 5  1976 FALSE 
+ 6  1977 FALSE 
+ 7  1978 FALSE 
+ 8  1980 FALSE 
+ 9  1982 FALSE 
+10  1983 FALSE 
+11  1984 FALSE 
+12  1985 FALSE 
+13  1986 FALSE 
+14  1987 FALSE 
+15  1988 FALSE 
+16  1989 FALSE 
+17  1990 FALSE 
+18  1991 FALSE 
+19  1993 FALSE 
+20  1994 FALSE 
+21  1996 FALSE 
+22  1998 FALSE 
+23  2000 FALSE 
+24  2002 FALSE 
+25  2004 FALSE 
+26  2006 FALSE 
+27  2008 FALSE 
+28  2010 FALSE 
+29  2012 FALSE 
+30  2014 FALSE 
+31  2016 FALSE 
+32  2018 FALSE 
+33  2021 TRUE  </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gss_which_years</span>(gss_all, vpsu) <span class="sc">%&gt;%</span> <span class="fu">print</span>(<span class="at">n =</span> <span class="cn">Inf</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 33 × 2
+    year vpsu 
+   &lt;dbl&gt; &lt;lgl&gt;
+ 1  1972 FALSE
+ 2  1973 FALSE
+ 3  1974 FALSE
+ 4  1975 TRUE 
+ 5  1976 TRUE 
+ 6  1977 TRUE 
+ 7  1978 TRUE 
+ 8  1980 TRUE 
+ 9  1982 TRUE 
+10  1983 TRUE 
+11  1984 TRUE 
+12  1985 TRUE 
+13  1986 TRUE 
+14  1987 TRUE 
+15  1988 TRUE 
+16  1989 TRUE 
+17  1990 TRUE 
+18  1991 TRUE 
+19  1993 TRUE 
+20  1994 TRUE 
+21  1996 TRUE 
+22  1998 TRUE 
+23  2000 TRUE 
+24  2002 TRUE 
+25  2004 TRUE 
+26  2006 TRUE 
+27  2008 TRUE 
+28  2010 TRUE 
+29  2012 TRUE 
+30  2014 TRUE 
+31  2016 TRUE 
+32  2018 TRUE 
+33  2021 TRUE </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a>gss_all <span class="sc">%&gt;%</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gss_which_years</span>(<span class="fu">c</span>(<span class="st">"racdif1"</span>, <span class="st">"racdif2"</span>, <span class="st">"racdif3"</span>, <span class="st">"racdif4"</span>, <span class="st">"raceacs2"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="at">n =</span> <span class="cn">Inf</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 33 × 6
+    year racdif1 racdif2 racdif3 racdif4 raceacs2
+   &lt;dbl&gt; &lt;lgl&gt;   &lt;lgl&gt;   &lt;lgl&gt;   &lt;lgl&gt;   &lt;lgl&gt;   
+ 1  1972 FALSE   FALSE   FALSE   FALSE   FALSE   
+ 2  1973 FALSE   FALSE   FALSE   FALSE   FALSE   
+ 3  1974 FALSE   FALSE   FALSE   FALSE   FALSE   
+ 4  1975 FALSE   FALSE   FALSE   FALSE   FALSE   
+ 5  1976 FALSE   FALSE   FALSE   FALSE   FALSE   
+ 6  1977 TRUE    TRUE    TRUE    TRUE    FALSE   
+ 7  1978 FALSE   FALSE   FALSE   FALSE   FALSE   
+ 8  1980 FALSE   FALSE   FALSE   FALSE   FALSE   
+ 9  1982 FALSE   FALSE   FALSE   FALSE   FALSE   
+10  1983 FALSE   FALSE   FALSE   FALSE   FALSE   
+11  1984 FALSE   FALSE   FALSE   FALSE   FALSE   
+12  1985 TRUE    TRUE    TRUE    TRUE    FALSE   
+13  1986 TRUE    TRUE    TRUE    TRUE    FALSE   
+14  1987 FALSE   FALSE   FALSE   FALSE   FALSE   
+15  1988 TRUE    TRUE    TRUE    TRUE    FALSE   
+16  1989 TRUE    TRUE    TRUE    TRUE    FALSE   
+17  1990 TRUE    TRUE    TRUE    TRUE    FALSE   
+18  1991 TRUE    TRUE    TRUE    TRUE    FALSE   
+19  1993 TRUE    TRUE    TRUE    TRUE    FALSE   
+20  1994 TRUE    TRUE    TRUE    TRUE    FALSE   
+21  1996 TRUE    TRUE    TRUE    TRUE    FALSE   
+22  1998 TRUE    TRUE    TRUE    TRUE    FALSE   
+23  2000 TRUE    TRUE    TRUE    TRUE    FALSE   
+24  2002 TRUE    TRUE    TRUE    TRUE    FALSE   
+25  2004 TRUE    TRUE    TRUE    TRUE    FALSE   
+26  2006 TRUE    TRUE    TRUE    TRUE    FALSE   
+27  2008 TRUE    TRUE    TRUE    TRUE    FALSE   
+28  2010 TRUE    TRUE    TRUE    TRUE    FALSE   
+29  2012 TRUE    TRUE    TRUE    TRUE    FALSE   
+30  2014 TRUE    TRUE    TRUE    TRUE    FALSE   
+31  2016 TRUE    TRUE    TRUE    TRUE    FALSE   
+32  2018 TRUE    TRUE    TRUE    TRUE    FALSE   
+33  2021 TRUE    TRUE    TRUE    TRUE    TRUE    </code></pre>
+</div>
+</div>
+<hr>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># View information about a specific variable</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>gss_doc <span class="sc">%&gt;%</span> <span class="fu">filter</span>(id <span class="sc">==</span> <span class="st">"racdif1"</span> <span class="sc">|</span> id <span class="sc">==</span> <span class="st">"racdif2"</span> <span class="sc">|</span> id <span class="sc">==</span> <span class="st">"racdif3"</span> <span class="sc">|</span> id <span class="sc">==</span> <span class="st">"racdif4"</span> <span class="sc">|</span> id <span class="sc">==</span> <span class="st">"raceacs2"</span>) <span class="sc">%&gt;%</span> </span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(id, description, text)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 4 × 3
+  id      description                                 text                      
+  &lt;chr&gt;   &lt;chr&gt;                                       &lt;chr&gt;                     
+1 racdif1 Differences due to discrimination           266. On the average (negr…
+2 racdif2 Differences due to in-born learning ability 266. On the average (negr…
+3 racdif3 Differences due to lack of education        266. On the average (negr…
+4 racdif4 Differences due to lack of will             266. On the average (negr…</code></pre>
+</div>
+</div>
+<hr>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Take a look at the variable marginals</span></span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>gss_doc <span class="sc">%&gt;%</span> <span class="fu">filter</span>(id <span class="sc">==</span> <span class="st">"racdif1"</span> <span class="sc">|</span> id <span class="sc">==</span> <span class="st">"racdif2"</span> <span class="sc">|</span> id <span class="sc">==</span> <span class="st">"racdif3"</span> <span class="sc">|</span> id <span class="sc">==</span> <span class="st">"racdif4"</span> <span class="sc">|</span> id <span class="sc">==</span> <span class="st">"raceacs2"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(marginals) <span class="sc">%&gt;%</span> </span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest</span>(<span class="at">cols =</span> <span class="fu">c</span>(marginals))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 24 × 5
+   percent n      value label id     
+     &lt;dbl&gt; &lt;chr&gt;  &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  
+ 1    40.3 11,703 1     YES   RACDIF1
+ 2    59.7 17,309 2     NO    RACDIF1
+ 3    NA   34,312 0     IAP   RACDIF1
+ 4    NA   1,353  8     DK    RACDIF1
+ 5    NA   137    9     &lt;NA&gt;  RACDIF1
+ 6   100   64,814 &lt;NA&gt;  Total RACDIF1
+ 7    13.1 3,859  1     YES   RACDIF2
+ 8    86.9 25,588 2     NO    RACDIF2
+ 9    NA   34,312 0     IAP   RACDIF2
+10    NA   942    8     DK    RACDIF2
+# ℹ 14 more rows</code></pre>
+</div>
+</div>
+<hr>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># take a look at the variable's properties</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>gss_doc <span class="sc">%&gt;%</span> <span class="fu">filter</span>(id <span class="sc">==</span> <span class="st">"racdif1"</span> <span class="sc">|</span> id <span class="sc">==</span> <span class="st">"racdif2"</span> <span class="sc">|</span> id <span class="sc">==</span> <span class="st">"racdif3"</span> <span class="sc">|</span> id <span class="sc">==</span> <span class="st">"racdif4"</span> <span class="sc">|</span> id <span class="sc">==</span> <span class="st">"raceacs2"</span>) <span class="sc">%&gt;%</span></span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(properties) <span class="sc">%&gt;%</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">unnest</span>(<span class="at">cols =</span> <span class="fu">c</span>(properties))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 12 × 3
+   property           value   id     
+   &lt;chr&gt;              &lt;chr&gt;   &lt;chr&gt;  
+ 1 Data type          numeric RACDIF1
+ 2 Missing-data codes 0,8,9   RACDIF1
+ 3 Record/column      1/1139  RACDIF1
+ 4 Data type          numeric RACDIF2
+ 5 Missing-data codes 0,8,9   RACDIF2
+ 6 Record/column      1/1140  RACDIF2
+ 7 Data type          numeric RACDIF3
+ 8 Missing-data codes 0,8,9   RACDIF3
+ 9 Record/column      1/1141  RACDIF3
+10 Data type          numeric RACDIF4
+11 Missing-data codes 0,8,9   RACDIF4
+12 Record/column      1/1142  RACDIF4</code></pre>
+</div>
+</div>
+<hr>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># View marginals and properties for more than one categorical variable</span></span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gss_get_marginals</span>(<span class="at">varnames =</span> <span class="fu">c</span>(<span class="st">"racdif1"</span>, <span class="st">"racdif2"</span>, <span class="st">"racdif3"</span>, <span class="st">"racdif4"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 24 × 6
+   variable percent     n value label id     
+   &lt;chr&gt;      &lt;dbl&gt; &lt;int&gt; &lt;chr&gt; &lt;chr&gt; &lt;chr&gt;  
+ 1 racdif1     40.3 11703 1     YES   RACDIF1
+ 2 racdif1     59.7 17309 2     NO    RACDIF1
+ 3 racdif1     NA   34312 0     IAP   RACDIF1
+ 4 racdif1     NA    1353 8     DK    RACDIF1
+ 5 racdif1     NA     137 9     &lt;NA&gt;  RACDIF1
+ 6 racdif1    100   64814 &lt;NA&gt;  Total RACDIF1
+ 7 racdif2     13.1  3859 1     YES   RACDIF2
+ 8 racdif2     86.9 25588 2     NO    RACDIF2
+ 9 racdif2     NA   34312 0     IAP   RACDIF2
+10 racdif2     NA     942 8     DK    RACDIF2
+# ℹ 14 more rows</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gss_get_props</span>(<span class="at">varnames =</span> <span class="fu">c</span>(<span class="st">"racdif1"</span>, <span class="st">"racdif2"</span>, <span class="st">"racdif3"</span>, <span class="st">"racdif4"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 12 × 4
+   variable property           value   id     
+   &lt;chr&gt;    &lt;chr&gt;              &lt;chr&gt;   &lt;chr&gt;  
+ 1 racdif1  Data type          numeric RACDIF1
+ 2 racdif1  Missing-data codes 0,8,9   RACDIF1
+ 3 racdif1  Record/column      1/1139  RACDIF1
+ 4 racdif2  Data type          numeric RACDIF2
+ 5 racdif2  Missing-data codes 0,8,9   RACDIF2
+ 6 racdif2  Record/column      1/1140  RACDIF2
+ 7 racdif3  Data type          numeric RACDIF3
+ 8 racdif3  Missing-data codes 0,8,9   RACDIF3
+ 9 racdif3  Record/column      1/1141  RACDIF3
+10 racdif4  Data type          numeric RACDIF4
+11 racdif4  Missing-data codes 0,8,9   RACDIF4
+12 racdif4  Record/column      1/1142  RACDIF4</code></pre>
+</div>
+</div>
+<hr>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a><span class="co"># find out which questions were asked in which years</span></span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a><span class="fu">gss_which_years</span>(gss_all, educ) <span class="sc">%&gt;%</span> <span class="fu">print</span>(<span class="at">n=</span> <span class="cn">Inf</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 33 × 2
+    year educ 
+   &lt;dbl&gt; &lt;lgl&gt;
+ 1  1972 TRUE 
+ 2  1973 TRUE 
+ 3  1974 TRUE 
+ 4  1975 TRUE 
+ 5  1976 TRUE 
+ 6  1977 TRUE 
+ 7  1978 TRUE 
+ 8  1980 TRUE 
+ 9  1982 TRUE 
+10  1983 TRUE 
+11  1984 TRUE 
+12  1985 TRUE 
+13  1986 TRUE 
+14  1987 TRUE 
+15  1988 TRUE 
+16  1989 TRUE 
+17  1990 TRUE 
+18  1991 TRUE 
+19  1993 TRUE 
+20  1994 TRUE 
+21  1996 TRUE 
+22  1998 TRUE 
+23  2000 TRUE 
+24  2002 TRUE 
+25  2004 TRUE 
+26  2006 TRUE 
+27  2008 TRUE 
+28  2010 TRUE 
+29  2012 TRUE 
+30  2014 TRUE 
+31  2016 TRUE 
+32  2018 TRUE 
+33  2021 TRUE </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gss_which_years</span>(gss_all, age) <span class="sc">%&gt;%</span> <span class="fu">print</span>(<span class="at">n=</span> <span class="cn">Inf</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 33 × 2
+    year age  
+   &lt;dbl&gt; &lt;lgl&gt;
+ 1  1972 TRUE 
+ 2  1973 TRUE 
+ 3  1974 TRUE 
+ 4  1975 TRUE 
+ 5  1976 TRUE 
+ 6  1977 TRUE 
+ 7  1978 TRUE 
+ 8  1980 TRUE 
+ 9  1982 TRUE 
+10  1983 TRUE 
+11  1984 TRUE 
+12  1985 TRUE 
+13  1986 TRUE 
+14  1987 TRUE 
+15  1988 TRUE 
+16  1989 TRUE 
+17  1990 TRUE 
+18  1991 TRUE 
+19  1993 TRUE 
+20  1994 TRUE 
+21  1996 TRUE 
+22  1998 TRUE 
+23  2000 TRUE 
+24  2002 TRUE 
+25  2004 TRUE 
+26  2006 TRUE 
+27  2008 TRUE 
+28  2010 TRUE 
+29  2012 TRUE 
+30  2014 TRUE 
+31  2016 TRUE 
+32  2018 TRUE 
+33  2021 TRUE </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gss_which_years</span>(gss_all, degree) <span class="sc">%&gt;%</span> <span class="fu">print</span>(<span class="at">n=</span> <span class="cn">Inf</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 33 × 2
+    year degree
+   &lt;dbl&gt; &lt;lgl&gt; 
+ 1  1972 TRUE  
+ 2  1973 TRUE  
+ 3  1974 TRUE  
+ 4  1975 TRUE  
+ 5  1976 TRUE  
+ 6  1977 TRUE  
+ 7  1978 TRUE  
+ 8  1980 TRUE  
+ 9  1982 TRUE  
+10  1983 TRUE  
+11  1984 TRUE  
+12  1985 TRUE  
+13  1986 TRUE  
+14  1987 TRUE  
+15  1988 TRUE  
+16  1989 TRUE  
+17  1990 TRUE  
+18  1991 TRUE  
+19  1993 TRUE  
+20  1994 TRUE  
+21  1996 TRUE  
+22  1998 TRUE  
+23  2000 TRUE  
+24  2002 TRUE  
+25  2004 TRUE  
+26  2006 TRUE  
+27  2008 TRUE  
+28  2010 TRUE  
+29  2012 TRUE  
+30  2014 TRUE  
+31  2016 TRUE  
+32  2018 TRUE  
+33  2021 TRUE  </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gss_which_years</span>(gss_all, wtssps) <span class="sc">%&gt;%</span> <span class="fu">print</span>(<span class="at">n=</span> <span class="cn">Inf</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 33 × 2
+    year wtssps
+   &lt;dbl&gt; &lt;lgl&gt; 
+ 1  1972 FALSE 
+ 2  1973 FALSE 
+ 3  1974 FALSE 
+ 4  1975 FALSE 
+ 5  1976 FALSE 
+ 6  1977 FALSE 
+ 7  1978 FALSE 
+ 8  1980 FALSE 
+ 9  1982 FALSE 
+10  1983 FALSE 
+11  1984 FALSE 
+12  1985 FALSE 
+13  1986 FALSE 
+14  1987 FALSE 
+15  1988 FALSE 
+16  1989 FALSE 
+17  1990 FALSE 
+18  1991 FALSE 
+19  1993 FALSE 
+20  1994 FALSE 
+21  1996 FALSE 
+22  1998 FALSE 
+23  2000 FALSE 
+24  2002 FALSE 
+25  2004 FALSE 
+26  2006 FALSE 
+27  2008 FALSE 
+28  2010 FALSE 
+29  2012 FALSE 
+30  2014 FALSE 
+31  2016 FALSE 
+32  2018 FALSE 
+33  2021 TRUE  </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a><span class="fu">gss_which_years</span>(gss_all, vpsu) <span class="sc">%&gt;%</span> <span class="fu">print</span>(<span class="at">n =</span> <span class="cn">Inf</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 33 × 2
+    year vpsu 
+   &lt;dbl&gt; &lt;lgl&gt;
+ 1  1972 FALSE
+ 2  1973 FALSE
+ 3  1974 FALSE
+ 4  1975 TRUE 
+ 5  1976 TRUE 
+ 6  1977 TRUE 
+ 7  1978 TRUE 
+ 8  1980 TRUE 
+ 9  1982 TRUE 
+10  1983 TRUE 
+11  1984 TRUE 
+12  1985 TRUE 
+13  1986 TRUE 
+14  1987 TRUE 
+15  1988 TRUE 
+16  1989 TRUE 
+17  1990 TRUE 
+18  1991 TRUE 
+19  1993 TRUE 
+20  1994 TRUE 
+21  1996 TRUE 
+22  1998 TRUE 
+23  2000 TRUE 
+24  2002 TRUE 
+25  2004 TRUE 
+26  2006 TRUE 
+27  2008 TRUE 
+28  2010 TRUE 
+29  2012 TRUE 
+30  2014 TRUE 
+31  2016 TRUE 
+32  2018 TRUE 
+33  2021 TRUE </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a><span class="co"># use the pipe to find out the years for multiple variables</span></span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>gss_all <span class="sc">%&gt;%</span></span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">gss_which_years</span>(<span class="fu">c</span>(<span class="st">"racdif1"</span>, <span class="st">"racdif2"</span>, <span class="st">"racdif3"</span>, <span class="st">"racdif4"</span>, <span class="st">"raceacs2"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb34-4"><a href="#cb34-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">print</span>(<span class="at">n =</span> <span class="cn">Inf</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 33 × 6
+    year racdif1 racdif2 racdif3 racdif4 raceacs2
+   &lt;dbl&gt; &lt;lgl&gt;   &lt;lgl&gt;   &lt;lgl&gt;   &lt;lgl&gt;   &lt;lgl&gt;   
+ 1  1972 FALSE   FALSE   FALSE   FALSE   FALSE   
+ 2  1973 FALSE   FALSE   FALSE   FALSE   FALSE   
+ 3  1974 FALSE   FALSE   FALSE   FALSE   FALSE   
+ 4  1975 FALSE   FALSE   FALSE   FALSE   FALSE   
+ 5  1976 FALSE   FALSE   FALSE   FALSE   FALSE   
+ 6  1977 TRUE    TRUE    TRUE    TRUE    FALSE   
+ 7  1978 FALSE   FALSE   FALSE   FALSE   FALSE   
+ 8  1980 FALSE   FALSE   FALSE   FALSE   FALSE   
+ 9  1982 FALSE   FALSE   FALSE   FALSE   FALSE   
+10  1983 FALSE   FALSE   FALSE   FALSE   FALSE   
+11  1984 FALSE   FALSE   FALSE   FALSE   FALSE   
+12  1985 TRUE    TRUE    TRUE    TRUE    FALSE   
+13  1986 TRUE    TRUE    TRUE    TRUE    FALSE   
+14  1987 FALSE   FALSE   FALSE   FALSE   FALSE   
+15  1988 TRUE    TRUE    TRUE    TRUE    FALSE   
+16  1989 TRUE    TRUE    TRUE    TRUE    FALSE   
+17  1990 TRUE    TRUE    TRUE    TRUE    FALSE   
+18  1991 TRUE    TRUE    TRUE    TRUE    FALSE   
+19  1993 TRUE    TRUE    TRUE    TRUE    FALSE   
+20  1994 TRUE    TRUE    TRUE    TRUE    FALSE   
+21  1996 TRUE    TRUE    TRUE    TRUE    FALSE   
+22  1998 TRUE    TRUE    TRUE    TRUE    FALSE   
+23  2000 TRUE    TRUE    TRUE    TRUE    FALSE   
+24  2002 TRUE    TRUE    TRUE    TRUE    FALSE   
+25  2004 TRUE    TRUE    TRUE    TRUE    FALSE   
+26  2006 TRUE    TRUE    TRUE    TRUE    FALSE   
+27  2008 TRUE    TRUE    TRUE    TRUE    FALSE   
+28  2010 TRUE    TRUE    TRUE    TRUE    FALSE   
+29  2012 TRUE    TRUE    TRUE    TRUE    FALSE   
+30  2014 TRUE    TRUE    TRUE    TRUE    FALSE   
+31  2016 TRUE    TRUE    TRUE    TRUE    FALSE   
+32  2018 TRUE    TRUE    TRUE    TRUE    FALSE   
+33  2021 TRUE    TRUE    TRUE    TRUE    TRUE    </code></pre>
+</div>
+</div>
+<hr>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="co"># subset data for 2021</span></span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>gss21 <span class="ot">&lt;-</span> gss_all <span class="sc">%&gt;%</span> <span class="fu">filter</span>(year <span class="sc">==</span> <span class="dv">2021</span>)</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>df <span class="ot">&lt;-</span> gss21 <span class="sc">%&gt;%</span> </span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="fu">c</span>(<span class="st">"vpsu"</span>, <span class="st">"age"</span>, <span class="st">"educ"</span>, <span class="st">"degree"</span>, <span class="st">"racdif1"</span>, <span class="st">"racdif2"</span>, <span class="st">"racdif3"</span>, <span class="st">"racdif4"</span>, <span class="st">"raceacs2"</span>, <span class="st">"wtssps"</span>, <span class="st">"vstrat"</span>)) <span class="sc">%&gt;%</span></span>
+<span id="cb36-5"><a href="#cb36-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">young =</span> <span class="fu">ifelse</span>(age <span class="sc">&lt;</span> <span class="dv">26</span>, <span class="st">"yes"</span>, <span class="st">"no"</span>)) <span class="sc">%&gt;%</span>  <span class="co"># create variable for 25 or younger</span></span>
+<span id="cb36-6"><a href="#cb36-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">drop_na</span>() <span class="co"># drop all missing values</span></span>
+<span id="cb36-7"><a href="#cb36-7" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb36-8"><a href="#cb36-8" aria-hidden="true" tabindex="-1"></a><span class="co"># check the data</span></span>
+<span id="cb36-9"><a href="#cb36-9" aria-hidden="true" tabindex="-1"></a><span class="fu">sapply</span>(df, <span class="cf">function</span>(x) <span class="fu">sum</span>(<span class="fu">is.na</span>(x)))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    vpsu      age     educ   degree  racdif1  racdif2  racdif3  racdif4 
+       0        0        0        0        0        0        0        0 
+raceacs2   wtssps   vstrat    young 
+       0        0        0        0 </code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>df</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2,376 × 12
+    vpsu age       educ  degree  racdif1 racdif2 racdif3 racdif4 raceacs2 wtssps
+   &lt;dbl&gt; &lt;dbl+lbl&gt; &lt;dbl&gt; &lt;dbl+l&gt; &lt;dbl+l&gt; &lt;dbl+l&gt; &lt;dbl+l&gt; &lt;dbl+l&gt; &lt;dbl+lb&gt;  &lt;dbl&gt;
+ 1    14 60        16    3 [bac… 1 [yes] 2 [no]  1 [yes] 2 [no]  0 [no]    0.320
+ 2   183 33        17    3 [bac… 2 [no]  2 [no]  2 [no]  2 [no]  1 [yes]   0.335
+ 3   116 20        12    1 [hig… 1 [yes] 2 [no]  1 [yes] 2 [no]  0 [no]    7.56 
+ 4   259 76        13    1 [hig… 1 [yes] 2 [no]  1 [yes] 2 [no]  0 [no]    1.38 
+ 5   232 37        11    0 [les… 1 [yes] 2 [no]  2 [no]  2 [no]  0 [no]    2.34 
+ 6   144 21        14    1 [hig… 1 [yes] 2 [no]  1 [yes] 2 [no]  0 [no]    3.90 
+ 7   144 75        18    4 [gra… 1 [yes] 2 [no]  1 [yes] 2 [no]  0 [no]    0.707
+ 8   199 22        15    2 [ass… 1 [yes] 2 [no]  1 [yes] 2 [no]  0 [no]    3.15 
+ 9   199 33        17    4 [gra… 1 [yes] 2 [no]  1 [yes] 2 [no]  0 [no]    0.980
+10    82 31        16    3 [bac… 1 [yes] 2 [no]  1 [yes] 2 [no]  0 [no]    0.631
+# ℹ 2,366 more rows
+# ℹ 2 more variables: vstrat &lt;dbl&gt;, young &lt;chr&gt;</code></pre>
+</div>
+</div>
+<hr>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a><span class="co"># following in line from the `gssr` package documentation we will label variables by type</span></span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>cat_vars <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"degree"</span>, <span class="st">"racdif1"</span>, <span class="st">"racdif2"</span>, <span class="st">"racdif3"</span>, <span class="st">"racdif4"</span>, <span class="st">"raceacs2"</span>)</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>cont_vars <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"age"</span>, <span class="st">"educ"</span>)</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>wt_vars <span class="ot">=</span> <span class="fu">c</span>(<span class="st">"wtssps"</span>)</span>
+<span id="cb40-5"><a href="#cb40-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb40-6"><a href="#cb40-6" aria-hidden="true" tabindex="-1"></a><span class="co"># use variable lists to mutate the variables</span></span>
+<span id="cb40-7"><a href="#cb40-7" aria-hidden="true" tabindex="-1"></a>dfc <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="co"># create a clean data set</span></span>
+<span id="cb40-8"><a href="#cb40-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">wtssps =</span> <span class="fu">as.numeric</span>(wtssps)) <span class="sc">%&gt;%</span> </span>
+<span id="cb40-9"><a href="#cb40-9" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="fu">across</span>(<span class="fu">all_of</span>(cat_vars), forcats<span class="sc">::</span>as_factor))</span>
+<span id="cb40-10"><a href="#cb40-10" aria-hidden="true" tabindex="-1"></a>dfc</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 2,376 × 12
+    vpsu age       educ   degree racdif1 racdif2 racdif3 racdif4 raceacs2 wtssps
+   &lt;dbl&gt; &lt;dbl+lbl&gt; &lt;dbl+&gt; &lt;fct&gt;  &lt;fct&gt;   &lt;fct&gt;   &lt;fct&gt;   &lt;fct&gt;   &lt;fct&gt;     &lt;dbl&gt;
+ 1    14 60        16     bache… yes     no      yes     no      no        0.320
+ 2   183 33        17     bache… no      no      no      no      yes       0.335
+ 3   116 20        12     high … yes     no      yes     no      no        7.56 
+ 4   259 76        13     high … yes     no      yes     no      no        1.38 
+ 5   232 37        11     less … yes     no      no      no      no        2.34 
+ 6   144 21        14     high … yes     no      yes     no      no        3.90 
+ 7   144 75        18     gradu… yes     no      yes     no      no        0.707
+ 8   199 22        15     assoc… yes     no      yes     no      no        3.15 
+ 9   199 33        17     gradu… yes     no      yes     no      no        0.980
+10    82 31        16     bache… yes     no      yes     no      no        0.631
+# ℹ 2,366 more rows
+# ℹ 2 more variables: vstrat &lt;dbl&gt;, young &lt;chr&gt;</code></pre>
+</div>
+</div>
+<hr>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb42"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb42-1"><a href="#cb42-1" aria-hidden="true" tabindex="-1"></a><span class="co"># INTEGRATE THE SURVEY WEIGHTS</span></span>
+<span id="cb42-2"><a href="#cb42-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb42-3"><a href="#cb42-3" aria-hidden="true" tabindex="-1"></a><span class="co"># show calculations before survey weights for one variable (remove n values)</span></span>
+<span id="cb42-4"><a href="#cb42-4" aria-hidden="true" tabindex="-1"></a>dfc <span class="sc">%&gt;%</span> </span>
+<span id="cb42-5"><a href="#cb42-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(degree, young, racdif1) <span class="sc">%&gt;%</span> </span>
+<span id="cb42-6"><a href="#cb42-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tally</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb42-7"><a href="#cb42-7" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pct =</span> <span class="fu">round</span>((n<span class="sc">/</span><span class="fu">sum</span>(n))<span class="sc">*</span><span class="dv">100</span>, <span class="dv">1</span>)) <span class="sc">%&gt;%</span> </span>
+<span id="cb42-8"><a href="#cb42-8" aria-hidden="true" tabindex="-1"></a>  <span class="fu">select</span>(<span class="sc">-</span>n) <span class="co"># remove n values (optional)</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 20 × 4
+# Groups:   degree, young [10]
+   degree                   young racdif1   pct
+   &lt;fct&gt;                    &lt;chr&gt; &lt;fct&gt;   &lt;dbl&gt;
+ 1 less than high school    no    yes      51.8
+ 2 less than high school    no    no       48.2
+ 3 less than high school    yes   yes      80  
+ 4 less than high school    yes   no       20  
+ 5 high school              no    yes      45  
+ 6 high school              no    no       55  
+ 7 high school              yes   yes      75.4
+ 8 high school              yes   no       24.6
+ 9 associate/junior college no    yes      50.9
+10 associate/junior college no    no       49.1
+11 associate/junior college yes   yes      81.8
+12 associate/junior college yes   no       18.2
+13 bachelor's               no    yes      62.5
+14 bachelor's               no    no       37.5
+15 bachelor's               yes   yes      77.4
+16 bachelor's               yes   no       22.6
+17 graduate                 no    yes      73.7
+18 graduate                 no    no       26.3
+19 graduate                 yes   yes      83.3
+20 graduate                 yes   no       16.7</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb44"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb44-1"><a href="#cb44-1" aria-hidden="true" tabindex="-1"></a>dfc <span class="sc">%&gt;%</span> </span>
+<span id="cb44-2"><a href="#cb44-2" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(degree, young, racdif1) <span class="sc">%&gt;%</span> </span>
+<span id="cb44-3"><a href="#cb44-3" aria-hidden="true" tabindex="-1"></a>  <span class="fu">tally</span>() <span class="sc">%&gt;%</span> </span>
+<span id="cb44-4"><a href="#cb44-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">mutate</span>(<span class="at">pct =</span> <span class="fu">round</span>((n<span class="sc">/</span><span class="fu">sum</span>(n))<span class="sc">*</span><span class="dv">100</span>, <span class="dv">1</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 20 × 5
+# Groups:   degree, young [10]
+   degree                   young racdif1     n   pct
+   &lt;fct&gt;                    &lt;chr&gt; &lt;fct&gt;   &lt;int&gt; &lt;dbl&gt;
+ 1 less than high school    no    yes        58  51.8
+ 2 less than high school    no    no         54  48.2
+ 3 less than high school    yes   yes         8  80  
+ 4 less than high school    yes   no          2  20  
+ 5 high school              no    yes       395  45  
+ 6 high school              no    no        483  55  
+ 7 high school              yes   yes        52  75.4
+ 8 high school              yes   no         17  24.6
+ 9 associate/junior college no    yes       110  50.9
+10 associate/junior college no    no        106  49.1
+11 associate/junior college yes   yes         9  81.8
+12 associate/junior college yes   no          2  18.2
+13 bachelor's               no    yes       360  62.5
+14 bachelor's               no    no        216  37.5
+15 bachelor's               yes   yes        24  77.4
+16 bachelor's               yes   no          7  22.6
+17 graduate                 no    yes       344  73.7
+18 graduate                 no    no        123  26.3
+19 graduate                 yes   yes         5  83.3
+20 graduate                 yes   no          1  16.7</code></pre>
+</div>
+</div>
+<hr>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb46"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb46-1"><a href="#cb46-1" aria-hidden="true" tabindex="-1"></a><span class="co"># integrate survey weights</span></span>
+<span id="cb46-2"><a href="#cb46-2" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">survey.lonely.psu =</span> <span class="st">"adjust"</span>)</span>
+<span id="cb46-3"><a href="#cb46-3" aria-hidden="true" tabindex="-1"></a><span class="fu">options</span>(<span class="at">na.action=</span><span class="st">"na.pass"</span>)</span>
+<span id="cb46-4"><a href="#cb46-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb46-5"><a href="#cb46-5" aria-hidden="true" tabindex="-1"></a>dfw <span class="ot">&lt;-</span> df <span class="sc">%&gt;%</span> <span class="co">#create new data frame called dfw for data frame with weights</span></span>
+<span id="cb46-6"><a href="#cb46-6" aria-hidden="true" tabindex="-1"></a>  <span class="fu">as_survey_design</span>(<span class="at">id =</span> vpsu,</span>
+<span id="cb46-7"><a href="#cb46-7" aria-hidden="true" tabindex="-1"></a>                   <span class="at">weights =</span> wtssps,</span>
+<span id="cb46-8"><a href="#cb46-8" aria-hidden="true" tabindex="-1"></a>                   <span class="at">nest =</span> <span class="cn">TRUE</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<hr>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb47"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb47-1"><a href="#cb47-1" aria-hidden="true" tabindex="-1"></a><span class="co"># compare outputs for sample variable</span></span>
+<span id="cb47-2"><a href="#cb47-2" aria-hidden="true" tabindex="-1"></a><span class="do">## Get the breakdown for every year</span></span>
+<span id="cb47-3"><a href="#cb47-3" aria-hidden="true" tabindex="-1"></a>dfw <span class="sc">%&gt;%</span></span>
+<span id="cb47-4"><a href="#cb47-4" aria-hidden="true" tabindex="-1"></a>  <span class="fu">group_by</span>(degree, young, racdif1) <span class="sc">%&gt;%</span></span>
+<span id="cb47-5"><a href="#cb47-5" aria-hidden="true" tabindex="-1"></a>  <span class="fu">summarize</span>(<span class="at">prop =</span> <span class="fu">survey_mean</span>(<span class="at">na.rm =</span> <span class="cn">TRUE</span>, <span class="at">vartype =</span> <span class="st">"ci"</span>))</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 20 × 6
+# Groups:   degree, young [10]
+   degree                       young racdif1    prop prop_low prop_upp
+   &lt;dbl+lbl&gt;                    &lt;chr&gt; &lt;dbl+lbl&gt; &lt;dbl&gt;    &lt;dbl&gt;    &lt;dbl&gt;
+ 1 0 [less than high school]    no    1 [yes]   0.497   0.391     0.602
+ 2 0 [less than high school]    no    2 [no]    0.503   0.398     0.609
+ 3 0 [less than high school]    yes   1 [yes]   0.854   0.637     1.07 
+ 4 0 [less than high school]    yes   2 [no]    0.146  -0.0712    0.363
+ 5 1 [high school]              no    1 [yes]   0.451   0.413     0.488
+ 6 1 [high school]              no    2 [no]    0.549   0.512     0.587
+ 7 1 [high school]              yes   1 [yes]   0.774   0.664     0.884
+ 8 1 [high school]              yes   2 [no]    0.226   0.116     0.336
+ 9 2 [associate/junior college] no    1 [yes]   0.505   0.431     0.579
+10 2 [associate/junior college] no    2 [no]    0.495   0.421     0.569
+11 2 [associate/junior college] yes   1 [yes]   0.755   0.452     1.06 
+12 2 [associate/junior college] yes   2 [no]    0.245  -0.0570    0.548
+13 3 [bachelor's]               no    1 [yes]   0.618   0.572     0.663
+14 3 [bachelor's]               no    2 [no]    0.382   0.337     0.428
+15 3 [bachelor's]               yes   1 [yes]   0.838   0.709     0.966
+16 3 [bachelor's]               yes   2 [no]    0.162   0.0336    0.291
+17 4 [graduate]                 no    1 [yes]   0.713   0.665     0.760
+18 4 [graduate]                 no    2 [no]    0.287   0.240     0.335
+19 4 [graduate]                 yes   1 [yes]   0.812   0.483     1.14 
+20 4 [graduate]                 yes   2 [no]    0.188  -0.141     0.517</code></pre>
+</div>
+</div>
+<hr>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb49"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb49-1"><a href="#cb49-1" aria-hidden="true" tabindex="-1"></a><span class="do">### MULTIPLE VARIABLE LINEAR REGRESSION MODEL (multiple independent variables)</span></span>
+<span id="cb49-2"><a href="#cb49-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb49-3"><a href="#cb49-3" aria-hidden="true" tabindex="-1"></a><span class="co"># develop the model</span></span>
+<span id="cb49-4"><a href="#cb49-4" aria-hidden="true" tabindex="-1"></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(racdif1 <span class="sc">~</span> age <span class="sc">+</span> educ <span class="sc">+</span> raceacs2, <span class="at">data =</span> df, <span class="at">weight =</span> wtssps)</span>
+<span id="cb49-5"><a href="#cb49-5" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>
+Call:
+lm(formula = racdif1 ~ age + educ + raceacs2, data = df, weights = wtssps)
+
+Weighted Residuals:
+    Min      1Q  Median      3Q     Max 
+-1.6475 -0.3684 -0.1789  0.4178  1.4224 
+
+Coefficients:
+              Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  1.6315044  0.0526608  30.981   &lt;2e-16 ***
+age          0.0052317  0.0005457   9.588   &lt;2e-16 ***
+educ        -0.0287252  0.0032477  -8.845   &lt;2e-16 ***
+raceacs2    -0.3063518  0.0286256 -10.702   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.4694 on 2372 degrees of freedom
+Multiple R-squared:  0.1039,    Adjusted R-squared:  0.1028 
+F-statistic:  91.7 on 3 and 2372 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb51"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb51-1"><a href="#cb51-1" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(model)<span class="sc">$</span>coefficient</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                Estimate   Std. Error    t value      Pr(&gt;|t|)
+(Intercept)  1.631504374 0.0526607505  30.981411 2.921074e-177
+age          0.005231662 0.0005456652   9.587678  2.187549e-21
+educ        -0.028725167 0.0032477440  -8.844652  1.753938e-18
+raceacs2    -0.306351750 0.0286256248 -10.702011  3.892366e-26</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb53"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb53-1"><a href="#cb53-1" aria-hidden="true" tabindex="-1"></a><span class="fu">confint</span>(model) <span class="co"># confidence interval for the model</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>                   2.5 %       97.5 %
+(Intercept)  1.528238506  1.734770241
+age          0.004161632  0.006301692
+educ        -0.035093877 -0.022356456
+raceacs2    -0.362485587 -0.250217913</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb55"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb55-1"><a href="#cb55-1" aria-hidden="true" tabindex="-1"></a><span class="co"># residual standard errors</span></span>
+<span id="cb55-2"><a href="#cb55-2" aria-hidden="true" tabindex="-1"></a><span class="fu">sigma</span>(model)<span class="sc">/</span><span class="fu">mean</span>(df<span class="sc">$</span>racdif1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[1] 0.3293089</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb57"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb57-1"><a href="#cb57-1" aria-hidden="true" tabindex="-1"></a><span class="co"># look at the anova output</span></span>
+<span id="cb57-2"><a href="#cb57-2" aria-hidden="true" tabindex="-1"></a><span class="fu">anova</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Variance Table
+
+Response: racdif1
+            Df Sum Sq Mean Sq F value    Pr(&gt;F)    
+age          1  19.44 19.4429  88.230 &lt; 2.2e-16 ***
+educ         1  15.94 15.9410  72.339 &lt; 2.2e-16 ***
+raceacs2     1  25.24 25.2392 114.533 &lt; 2.2e-16 ***
+Residuals 2372 522.71  0.2204                      
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+<hr>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb59"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb59-1"><a href="#cb59-1" aria-hidden="true" tabindex="-1"></a><span class="do">## MULTIVARIATE MULTIPLE REGRESSION (multiple dependent variables)</span></span>
+<span id="cb59-2"><a href="#cb59-2" aria-hidden="true" tabindex="-1"></a>mlm1 <span class="ot">&lt;-</span> <span class="fu">lm</span>(<span class="fu">cbind</span>(racdif1, racdif2, racdif3, racdif4) <span class="sc">~</span> age <span class="sc">+</span> educ <span class="sc">+</span> raceacs2, <span class="at">data =</span> df, <span class="at">weight =</span> wtssps)</span>
+<span id="cb59-3"><a href="#cb59-3" aria-hidden="true" tabindex="-1"></a><span class="fu">summary</span>(mlm1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Response racdif1 :
+
+Call:
+lm(formula = racdif1 ~ age + educ + raceacs2, data = df, weights = wtssps)
+
+Weighted Residuals:
+    Min      1Q  Median      3Q     Max 
+-1.6475 -0.3684 -0.1789  0.4178  1.4224 
+
+Coefficients:
+              Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  1.6315044  0.0526608  30.981   &lt;2e-16 ***
+age          0.0052317  0.0005457   9.588   &lt;2e-16 ***
+educ        -0.0287252  0.0032477  -8.845   &lt;2e-16 ***
+raceacs2    -0.3063518  0.0286256 -10.702   &lt;2e-16 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.4694 on 2372 degrees of freedom
+Multiple R-squared:  0.1039,    Adjusted R-squared:  0.1028 
+F-statistic:  91.7 on 3 and 2372 DF,  p-value: &lt; 2.2e-16
+
+
+Response racdif2 :
+
+Call:
+lm(formula = racdif2 ~ age + educ + raceacs2, data = df, weights = wtssps)
+
+Weighted Residuals:
+     Min       1Q   Median       3Q      Max 
+-2.06147  0.01350  0.03584  0.06618  0.37353 
+
+Coefficients:
+              Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  1.8067434  0.0262084  68.937  &lt; 2e-16 ***
+age          0.0007793  0.0002716   2.870  0.00414 ** 
+educ         0.0076754  0.0016164   4.749 2.17e-06 ***
+raceacs2    -0.0890116  0.0142465  -6.248 4.91e-10 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.2336 on 2372 degrees of freedom
+Multiple R-squared:  0.03015,   Adjusted R-squared:  0.02892 
+F-statistic: 24.58 on 3 and 2372 DF,  p-value: 1.171e-15
+
+
+Response racdif3 :
+
+Call:
+lm(formula = racdif3 ~ age + educ + raceacs2, data = df, weights = wtssps)
+
+Weighted Residuals:
+    Min      1Q  Median      3Q     Max 
+-1.6055 -0.3674 -0.2112  0.4540  1.3276 
+
+Coefficients:
+              Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  1.8038312  0.0539073  33.462  &lt; 2e-16 ***
+age          0.0032584  0.0005586   5.833 6.18e-09 ***
+educ        -0.0357888  0.0033246 -10.765  &lt; 2e-16 ***
+raceacs2    -0.1157096  0.0293033  -3.949 8.09e-05 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.4805 on 2372 degrees of freedom
+Multiple R-squared:  0.0626,    Adjusted R-squared:  0.06141 
+F-statistic:  52.8 on 3 and 2372 DF,  p-value: &lt; 2.2e-16
+
+
+Response racdif4 :
+
+Call:
+lm(formula = racdif4 ~ age + educ + raceacs2, data = df, weights = wtssps)
+
+Weighted Residuals:
+    Min      1Q  Median      3Q     Max 
+-1.6175 -0.4092  0.1532  0.2758  1.3339 
+
+Coefficients:
+              Estimate Std. Error t value Pr(&gt;|t|)    
+(Intercept)  1.3465037  0.0488972  27.537  &lt; 2e-16 ***
+age         -0.0027009  0.0005067  -5.331 1.07e-07 ***
+educ         0.0346839  0.0030156  11.501  &lt; 2e-16 ***
+raceacs2     0.0948325  0.0265798   3.568 0.000367 ***
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+
+Residual standard error: 0.4359 on 2372 degrees of freedom
+Multiple R-squared:  0.06557,   Adjusted R-squared:  0.06439 
+F-statistic: 55.48 on 3 and 2372 DF,  p-value: &lt; 2.2e-16</code></pre>
+</div>
+<div class="sourceCode cell-code" id="cb61"><pre class="sourceCode r code-with-copy"><code class="sourceCode r"><span id="cb61-1"><a href="#cb61-1" aria-hidden="true" tabindex="-1"></a><span class="fu">manova</span>(mlm1)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Call:
+   manova(mlm1)
+
+Terms:
+                     age     educ raceacs2 Residuals
+racdif1          19.4429  15.9410  25.2392  522.7079
+racdif2           0.5552   1.3384   2.1307  129.4694
+racdif3           6.8186  26.1593   3.6006  547.7481
+racdif4           4.5466  24.6595   2.4185  450.6644
+Deg. of Freedom        1        1        1      2372
+
+Residual standard errors: 0.4694314 0.2336287 0.4805439 0.4358824
+Estimated effects may be unbalanced</code></pre>
+</div>
+</div>
+<section id="next-up-week-14" class="level3">
+<h3 class="anchored" data-anchor-id="next-up-week-14">Next up: Week 14</h3>
+
+
+</section>
+</section>
+
+</main> <!-- /main -->
+<script id="quarto-html-after-body" type="application/javascript">
+window.document.addEventListener("DOMContentLoaded", function (event) {
+  const toggleBodyColorMode = (bsSheetEl) => {
+    const mode = bsSheetEl.getAttribute("data-mode");
+    const bodyEl = window.document.querySelector("body");
+    if (mode === "dark") {
+      bodyEl.classList.add("quarto-dark");
+      bodyEl.classList.remove("quarto-light");
+    } else {
+      bodyEl.classList.add("quarto-light");
+      bodyEl.classList.remove("quarto-dark");
+    }
+  }
+  const toggleBodyColorPrimary = () => {
+    const bsSheetEl = window.document.querySelector("link#quarto-bootstrap");
+    if (bsSheetEl) {
+      toggleBodyColorMode(bsSheetEl);
+    }
+  }
+  toggleBodyColorPrimary();  
+  const disableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'prefetch';
+    }
+  }
+  const enableStylesheet = (stylesheets) => {
+    for (let i=0; i < stylesheets.length; i++) {
+      const stylesheet = stylesheets[i];
+      stylesheet.rel = 'stylesheet';
+    }
+  }
+  const manageTransitions = (selector, allowTransitions) => {
+    const els = window.document.querySelectorAll(selector);
+    for (let i=0; i < els.length; i++) {
+      const el = els[i];
+      if (allowTransitions) {
+        el.classList.remove('notransition');
+      } else {
+        el.classList.add('notransition');
+      }
+    }
+  }
+  const toggleColorMode = (alternate) => {
+    // Switch the stylesheets
+    const alternateStylesheets = window.document.querySelectorAll('link.quarto-color-scheme.quarto-color-alternate');
+    manageTransitions('#quarto-margin-sidebar .nav-link', false);
+    if (alternate) {
+      enableStylesheet(alternateStylesheets);
+      for (const sheetNode of alternateStylesheets) {
+        if (sheetNode.id === "quarto-bootstrap") {
+          toggleBodyColorMode(sheetNode);
+        }
+      }
+    } else {
+      disableStylesheet(alternateStylesheets);
+      toggleBodyColorPrimary();
+    }
+    manageTransitions('#quarto-margin-sidebar .nav-link', true);
+    // Switch the toggles
+    const toggles = window.document.querySelectorAll('.quarto-color-scheme-toggle');
+    for (let i=0; i < toggles.length; i++) {
+      const toggle = toggles[i];
+      if (toggle) {
+        if (alternate) {
+          toggle.classList.add("alternate");     
+        } else {
+          toggle.classList.remove("alternate");
+        }
+      }
+    }
+    // Hack to workaround the fact that safari doesn't
+    // properly recolor the scrollbar when toggling (#1455)
+    if (navigator.userAgent.indexOf('Safari') > 0 && navigator.userAgent.indexOf('Chrome') == -1) {
+      manageTransitions("body", false);
+      window.scrollTo(0, 1);
+      setTimeout(() => {
+        window.scrollTo(0, 0);
+        manageTransitions("body", true);
+      }, 40);  
+    }
+  }
+  const isFileUrl = () => { 
+    return window.location.protocol === 'file:';
+  }
+  const hasAlternateSentinel = () => {  
+    let styleSentinel = getColorSchemeSentinel();
+    if (styleSentinel !== null) {
+      return styleSentinel === "alternate";
+    } else {
+      return false;
+    }
+  }
+  const setStyleSentinel = (alternate) => {
+    const value = alternate ? "alternate" : "default";
+    if (!isFileUrl()) {
+      window.localStorage.setItem("quarto-color-scheme", value);
+    } else {
+      localAlternateSentinel = value;
+    }
+  }
+  const getColorSchemeSentinel = () => {
+    if (!isFileUrl()) {
+      const storageValue = window.localStorage.getItem("quarto-color-scheme");
+      return storageValue != null ? storageValue : localAlternateSentinel;
+    } else {
+      return localAlternateSentinel;
+    }
+  }
+  let localAlternateSentinel = 'default';
+  // Dark / light mode switch
+  window.quartoToggleColorScheme = () => {
+    // Read the current dark / light value 
+    let toAlternate = !hasAlternateSentinel();
+    toggleColorMode(toAlternate);
+    setStyleSentinel(toAlternate);
+  };
+  // Ensure there is a toggle, if there isn't float one in the top right
+  if (window.document.querySelector('.quarto-color-scheme-toggle') === null) {
+    const a = window.document.createElement('a');
+    a.classList.add('top-right');
+    a.classList.add('quarto-color-scheme-toggle');
+    a.href = "";
+    a.onclick = function() { try { window.quartoToggleColorScheme(); } catch {} return false; };
+    const i = window.document.createElement("i");
+    i.classList.add('bi');
+    a.appendChild(i);
+    window.document.body.appendChild(a);
+  }
+  // Switch to dark mode if need be
+  if (hasAlternateSentinel()) {
+    toggleColorMode(true);
+  } else {
+    toggleColorMode(false);
+  }
+  const icon = "";
+  const anchorJS = new window.AnchorJS();
+  anchorJS.options = {
+    placement: 'right',
+    icon: icon
+  };
+  anchorJS.add('.anchored');
+  const isCodeAnnotation = (el) => {
+    for (const clz of el.classList) {
+      if (clz.startsWith('code-annotation-')) {                     
+        return true;
+      }
+    }
+    return false;
+  }
+  const clipboard = new window.ClipboardJS('.code-copy-button', {
+    text: function(trigger) {
+      const codeEl = trigger.previousElementSibling.cloneNode(true);
+      for (const childEl of codeEl.children) {
+        if (isCodeAnnotation(childEl)) {
+          childEl.remove();
+        }
+      }
+      return codeEl.innerText;
+    }
+  });
+  clipboard.on('success', function(e) {
+    // button target
+    const button = e.trigger;
+    // don't keep focus
+    button.blur();
+    // flash "checked"
+    button.classList.add('code-copy-button-checked');
+    var currentTitle = button.getAttribute("title");
+    button.setAttribute("title", "Copied!");
+    let tooltip;
+    if (window.bootstrap) {
+      button.setAttribute("data-bs-toggle", "tooltip");
+      button.setAttribute("data-bs-placement", "left");
+      button.setAttribute("data-bs-title", "Copied!");
+      tooltip = new bootstrap.Tooltip(button, 
+        { trigger: "manual", 
+          customClass: "code-copy-button-tooltip",
+          offset: [0, -8]});
+      tooltip.show();    
+    }
+    setTimeout(function() {
+      if (tooltip) {
+        tooltip.hide();
+        button.removeAttribute("data-bs-title");
+        button.removeAttribute("data-bs-toggle");
+        button.removeAttribute("data-bs-placement");
+      }
+      button.setAttribute("title", currentTitle);
+      button.classList.remove('code-copy-button-checked');
+    }, 1000);
+    // clear code selection
+    e.clearSelection();
+  });
+  function tippyHover(el, contentFn) {
+    const config = {
+      allowHTML: true,
+      content: contentFn,
+      maxWidth: 500,
+      delay: 100,
+      arrow: false,
+      appendTo: function(el) {
+          return el.parentElement;
+      },
+      interactive: true,
+      interactiveBorder: 10,
+      theme: 'quarto',
+      placement: 'bottom-start'
+    };
+    window.tippy(el, config); 
+  }
+  const noterefs = window.document.querySelectorAll('a[role="doc-noteref"]');
+  for (var i=0; i<noterefs.length; i++) {
+    const ref = noterefs[i];
+    tippyHover(ref, function() {
+      // use id or data attribute instead here
+      let href = ref.getAttribute('data-footnote-href') || ref.getAttribute('href');
+      try { href = new URL(href).hash; } catch {}
+      const id = href.replace(/^#\/?/, "");
+      const note = window.document.getElementById(id);
+      return note.innerHTML;
+    });
+  }
+      let selectedAnnoteEl;
+      const selectorForAnnotation = ( cell, annotation) => {
+        let cellAttr = 'data-code-cell="' + cell + '"';
+        let lineAttr = 'data-code-annotation="' +  annotation + '"';
+        const selector = 'span[' + cellAttr + '][' + lineAttr + ']';
+        return selector;
+      }
+      const selectCodeLines = (annoteEl) => {
+        const doc = window.document;
+        const targetCell = annoteEl.getAttribute("data-target-cell");
+        const targetAnnotation = annoteEl.getAttribute("data-target-annotation");
+        const annoteSpan = window.document.querySelector(selectorForAnnotation(targetCell, targetAnnotation));
+        const lines = annoteSpan.getAttribute("data-code-lines").split(",");
+        const lineIds = lines.map((line) => {
+          return targetCell + "-" + line;
+        })
+        let top = null;
+        let height = null;
+        let parent = null;
+        if (lineIds.length > 0) {
+            //compute the position of the single el (top and bottom and make a div)
+            const el = window.document.getElementById(lineIds[0]);
+            top = el.offsetTop;
+            height = el.offsetHeight;
+            parent = el.parentElement.parentElement;
+          if (lineIds.length > 1) {
+            const lastEl = window.document.getElementById(lineIds[lineIds.length - 1]);
+            const bottom = lastEl.offsetTop + lastEl.offsetHeight;
+            height = bottom - top;
+          }
+          if (top !== null && height !== null && parent !== null) {
+            // cook up a div (if necessary) and position it 
+            let div = window.document.getElementById("code-annotation-line-highlight");
+            if (div === null) {
+              div = window.document.createElement("div");
+              div.setAttribute("id", "code-annotation-line-highlight");
+              div.style.position = 'absolute';
+              parent.appendChild(div);
+            }
+            div.style.top = top - 2 + "px";
+            div.style.height = height + 4 + "px";
+            let gutterDiv = window.document.getElementById("code-annotation-line-highlight-gutter");
+            if (gutterDiv === null) {
+              gutterDiv = window.document.createElement("div");
+              gutterDiv.setAttribute("id", "code-annotation-line-highlight-gutter");
+              gutterDiv.style.position = 'absolute';
+              const codeCell = window.document.getElementById(targetCell);
+              const gutter = codeCell.querySelector('.code-annotation-gutter');
+              gutter.appendChild(gutterDiv);
+            }
+            gutterDiv.style.top = top - 2 + "px";
+            gutterDiv.style.height = height + 4 + "px";
+          }
+          selectedAnnoteEl = annoteEl;
+        }
+      };
+      const unselectCodeLines = () => {
+        const elementsIds = ["code-annotation-line-highlight", "code-annotation-line-highlight-gutter"];
+        elementsIds.forEach((elId) => {
+          const div = window.document.getElementById(elId);
+          if (div) {
+            div.remove();
+          }
+        });
+        selectedAnnoteEl = undefined;
+      };
+      // Attach click handler to the DT
+      const annoteDls = window.document.querySelectorAll('dt[data-target-cell]');
+      for (const annoteDlNode of annoteDls) {
+        annoteDlNode.addEventListener('click', (event) => {
+          const clickedEl = event.target;
+          if (clickedEl !== selectedAnnoteEl) {
+            unselectCodeLines();
+            const activeEl = window.document.querySelector('dt[data-target-cell].code-annotation-active');
+            if (activeEl) {
+              activeEl.classList.remove('code-annotation-active');
+            }
+            selectCodeLines(clickedEl);
+            clickedEl.classList.add('code-annotation-active');
+          } else {
+            // Unselect the line
+            unselectCodeLines();
+            clickedEl.classList.remove('code-annotation-active');
+          }
+        });
+      }
+  const findCites = (el) => {
+    const parentEl = el.parentElement;
+    if (parentEl) {
+      const cites = parentEl.dataset.cites;
+      if (cites) {
+        return {
+          el,
+          cites: cites.split(' ')
+        };
+      } else {
+        return findCites(el.parentElement)
+      }
+    } else {
+      return undefined;
+    }
+  };
+  var bibliorefs = window.document.querySelectorAll('a[role="doc-biblioref"]');
+  for (var i=0; i<bibliorefs.length; i++) {
+    const ref = bibliorefs[i];
+    const citeInfo = findCites(ref);
+    if (citeInfo) {
+      tippyHover(citeInfo.el, function() {
+        var popup = window.document.createElement('div');
+        citeInfo.cites.forEach(function(cite) {
+          var citeDiv = window.document.createElement('div');
+          citeDiv.classList.add('hanging-indent');
+          citeDiv.classList.add('csl-entry');
+          var biblioDiv = window.document.getElementById('ref-' + cite);
+          if (biblioDiv) {
+            citeDiv.innerHTML = biblioDiv.innerHTML;
+          }
+          popup.appendChild(citeDiv);
+        });
+        return popup.innerHTML;
+      });
+    }
+  }
+});
+</script>
+</div> <!-- /content -->
+<footer class="footer">
+  <div class="nav-footer">
+    <div class="nav-footer-left">© Copyright 2023, Nathan Alexander</div>   
+    <div class="nav-footer-center">
+      &nbsp;
+    </div>
+    <div class="nav-footer-right">This page was built by Nathan Alexander, PhD in <a href="https://quarto.org/">Quarto</a></div>
+  </div>
+</footer>
+
+
+
+</body></html>
