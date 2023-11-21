@@ -1,0 +1,441 @@
+---
+title: "DATA 202 - Week 14"
+subtitle: "Overview of additional models"
+author: "Nathan Alexander, PhD"
+institute: "Center for Applied Data Science and Analytics"
+format: 
+  html: default
+  revealjs:
+    output-file: week14-slides.html
+    height: 900
+    width: 1600
+    smaller: false
+    scrollable: true
+    slide-number: c/t #< collapsed/total
+    logo: "img/howard-logo.jpg"
+    footer: "[Course Data GitHub](https://github.com/data-202)"
+    toc: false
+    theme: simple
+    echo: true
+    incremental: false
+---
+
+## Part I: Context
+
+Now that we have many foundational elements identified and practiced - such as generating code to explore data, cleaning data for analysis, and some elements of theory construction - we can begin focusing on some of the important technical components of model building and analysis: interpretation. 
+
+Together with aforementioned components, interpretation relies very heavily on both your research question and the subsequent empirical study. While your research question may be based on a host of factors, your empirical study relies on a combination of your analytic **frameworks** and your analytic **methodologies**, each of which informs your analytic **interpretations**.
+
+In particular, this week we examine the role of interpretation and the use of additional techniques and models beyond linear regression. We will also focus a bit more on variations in interpretations found in multiple regression and multivariate regression analysis. We examine some of these connections to differing forms of single, multiple variable, and multivariate analyses across disciplines.
+
+---
+
+![A suggestive and indicative mode of the triangulation method from [Tzagkarakis & Kritas (2023)](https://link.springer.com/article/10.1007/s11135-022-01384-y).](img/wk14-a-1.png)
+
+### Research questions
+
+The below research questions highlight the intersection of social justice issues with quantitative analysis. Each question aims to investigate the impact of various social, economic, and policy factors on marginalized populations, helping to identify inequalities and inform evidence-based policy interventions. Keep in mind that these questions can be further refined and tailored to specific contexts or issues of interest within the realm of social justice.
+
+1. How does income inequality affect access to quality education?
+
+2. What is the relationship between racial disparities in the criminal justice system?
+
+3. How does gender discrimination impact career advancement in the workplace?
+
+4. What are the effects of housing policies on residential segregation and access to affordable housing?
+
+5. How does healthcare accessibility and affordability vary across different socioeconomic groups?
+
+6. What is the impact of immigration policies on the economic well-being and social integration of immigrant populations?
+
+7. How do social welfare policies and programs influence poverty rates and social mobility?
+
+8. What are the underlying factors contributing to disparities in voting rights and political representation among different demographic groups?
+
+9. How does discrimination based on sexual orientation or gender identity affect mental health outcomes?
+
+10. What is the relationship between environmental indicators and the unequal distribution of environmental hazards in historically disadvantaged communities?
+
+---
+
+### Sample analysis
+
+Let us continue with a sample analysis. 
+
+We will assume that state data collected for a sample of 100 randomly selected cities requesting funding after the approval of a new bill on affordable housing is provided to a group of researchers. The data set includes three key variables.
+
+The research question, a modified relation to question four above, for the analysis is as follows:
+
+Research question
+: What is the relationship between state funding for affordable housing initiatives and the availability of new affordable housing units?
+
+```{r}
+#| echo: false
+#| output: false
+#| warning: false
+install.packages("MASS", repos = "http://cran.us.r-project.org")
+library(MASS)
+library(ggplot2)
+library(dplyr)
+library(tidyverse)
+# Create the variables
+set.seed(1234)
+city <- c(1:100)
+funding <- runif(n = 100, min = 213, max = 550) # Example values for state funding
+housing_availability <- rnorm(100, mean = 35, sd = 9) + sqrt(funding)
+advocacy <- runif(n=100, min=0, max = 15)+sqrt(funding)
+data = data.frame(city, funding, housing_availability, advocacy)
+data = round(data, 2)
+city_mean = mean(funding)
+city_sd = sd(funding)
+housing_mean = mean(housing_availability)
+housing_sd = sd(housing_availability)
+x <- dnorm(funding, city_mean, city_sd)
+y <- dnorm(housing_availability, housing_mean, housing_sd)
+```
+
+---
+
+Details about each variable are provided below:
+
+  - `city` is a marker (which matches the data index) used to indicate a randomly selected city.
+  
+  - `funding` is the total amount of funding provided to families (in thousands of dollars) in a given 3-week period
+  
+  - `housing_availability` is the average of city housing units allocated over the same `funding` period
+  
+  - `advocacy` is the average number of calls to the state representatives' hotline four months prior
+  
+The advocacy variable was generated as a result of a similar study conducted in a neighboring state, which noticed that there was a potential lag-relationship between `advocacy` and `funding` allocations approved at the state-level.
+  
+```{r}
+head(data)
+tail(data)
+```
+
+```{r}
+summary(data)
+```
+
+---
+
+### Exploration
+
+We can use some base-R commands to get a quick summary of each variable.
+
+```{r}
+# get plots of variables
+hist(funding)
+hist(housing_availability)
+
+# get summary statistics for variables
+summary(funding)
+summary(housing_availability)
+```
+
+```{r}
+#| echo: false
+#| output: false
+#| warning: false
+# look at the distributions
+plot(funding, x)
+plot(housing_availability, y) 
+```
+```
+
+We can also produce quick plots to examine the relationship between each variable.
+
+Here, we include code to get the correlation coefficient.
+
+```{r}
+# perform correlation analysis
+plot(funding, housing_availability)
+cor(funding, housing_availability)
+plot(advocacy, funding)
+cor(advocacy, funding)
+plot(advocacy, housing_availability)
+cor(advocacy, housing_availability)
+```
+
+---
+
+### Interpretation
+
+First, researchers decided to run a linear regression model on `housing_availability` and `funding`.
+
+```{r}
+# perform linear regression analysis
+model1 <- lm(housing_availability ~ funding)
+
+# summary of the regression model
+summary(model1)
+```
+
+##### Plot the data and regression line
+```{r}
+#| warning: false
+ggplot(data, aes(x = funding, y = housing_availability)) +
+  geom_point() +
+  geom_smooth(method = "lm", se = FALSE) +
+  labs(x = "City Funding", y = "Housing Availability", title = "Relationship between City Funding and Housing Availability")
+```
+  
+---
+
+One researcher, however, suggested that a more **robust regression analysis** should be used with OLS techniques.
+
+Robust regression analysis, as you may recall, helps us reduce outlier effects.
+
+Note: we need to load the `MASS` package and library to run the following code.
+
+```{r}
+ols <- lm(housing_availability ~ funding)
+summary(ols)
+opar <- par(mfrow = c(2, 2), oma = c(0, 0, 1.1, 0))
+plot(ols, las = 1)
+par(opar) # we use the par() function to restore graphical parameters to their original values
+```
+
+From this analysis, we see that a few observations are possibly problematic to our model. 
+
+We can explore some of these observations in more detail.
+
+```{r}
+data[c(12, 50, 73), 1:4]
+```
+
+---
+
+The three cities noted (and there may be others) have large residuals. 
+
+We can examine these in more detail.
+
+```{r}
+distance <- cooks.distance(ols) # we get a measure of the Cook's distance values.
+res <- stdres(ols)
+a <- cbind(data, distance, res)
+a[distance > 4/100, ]
+```
+
+The decisions were made based on the following notes:
+
+  - Cook's distance `cooks.distance()` provides a measure of the influence of a data point when performing regression.
+  
+  - `stdres` standardized the residuals from our model
+  
+  - `cbind()` attaches the two measures to our data frame
+  
+We can use a cutoff point $4/n$ where $n$ is the sample size recommend by others to select the values to display.
+
+---
+
+We then get the absolute value of the residuals (remember that the sign does not matter in distance), and we print the observations with the highest residuals (here we focus on the top 10 values).
+
+```{r}
+absres <- abs(res)
+data1 <- cbind(data, distance, res, absres)
+assorted <- data1[order(-absres), ]
+assorted[1:10,]
+```
+
+---
+
+We now run our robust regression analysis. 
+
+We do this by using the `rlm()` function in the `MASS` package. 
+
+There are several weights that can be used for the iterated re-weighted least squares technique (IRLS)[^IRLS]. 
+
+[^IRLS]: More information about the source of this code and the robust regression analysis can be found [here](https://stats.oarc.ucla.edu/r/dae/robust-regression/).
+
+```{r}
+rrmodel <- rlm(housing_availability ~ funding, data = data)
+summary(rrmodel)
+```
+
+The default weight is the Huber weight. Huber weights are a type of weight function used to downweight or mitigate the influence of outliers on the estimation procedure. In traditional least squares regression, all data points are given equal weight, and the estimation procedure is sensitive to the presence of outliers. The use of weights in our robust regression model aims to provide more robust estimates by assigning different weights to the observations, giving less influence to outliers.
+
+```{r}
+hweights <- data.frame(city = data$city, resid = rrmodel$resid, weight = rrmodel$w)
+hweights2 <- hweights[order(rrmodel$w),]
+hweights2[1:15,]
+```
+
+Huber weights assign larger weights to observations that are close to the regression line and smaller weights to observations that deviate significantly from the line. The weight assigned to each observation depends on its residuals (the difference between the observed values and the predicted values).
+
+---
+
+#### Causality
+
+Despite our work on the initial model, the issue of causality needs to be discussed.
+
+There are a few considerations that need to be taken into account:
+
+  - **Confounding variables**: There may be other factors that influence the model apart from city funding. For example, economic conditions, housing availability, and social policies can also play significant roles. Failing to account for these confounding variables may lead to erroneous conclusions about the causal relationship.
+  
+  - **Reverse causality**: The relationships can be bidirectional. Higher housing availability rates may lead to increased city funding directed at addressing the issue. Thus, it's possible that the relationship is driven by reverse causality, where higher levels of housing availability cause increased funding rather than the other way around.
+  
+  - **Omitted variable bias**: There may be unobserved or unmeasured factors that affect both city funding and housing availability. Failing to include these variables in the analysis can lead to omitted variable bias, potentially distorting the estimated relationships.
+  
+  - **Ecological fallacy**: Analyzing aggregated data across the state- and city- levels may not capture the correct level of nuances within the relationship. Aggregating data can lead to an ecological fallacy, where conclusions made at the aggregate level may not hold true at different levels.
+
+---
+
+#### Multicollinearity
+
+Multicollinearity refers to a high correlation or linear relationship between two or more predictor variables in a regression model. In the case of three variables, multicollinearity occurs when there is a strong linear relationship between any pair of the three variables, making it difficult to separate their individual effects on the response variable. This can cause instability in the regression model, inflated standard errors, and difficulties in interpreting the coefficients.
+
+---
+
+Assume we updated our theoretical statement and research question and add the `advocacy` variable to our model.
+
+```{r}
+# perform linear regression analysis
+model2 <- lm(housing_availability ~ funding + advocacy)
+
+# summary of the regression model
+summary(model2)
+```
+
+
+#### Interaction effects
+
+Next, we add an interaction term to our model.
+
+```{r}
+# get a summary of the advocacy data
+summary(advocacy)
+
+# examine the relationship between funding and advocacy
+cor(advocacy, funding)
+
+# perform linear regression analysis
+model3 <- lm(housing_availability ~ funding + advocacy + funding*advocacy)
+
+# summary of the regression model
+summary(model3)
+```
+
+Please note that we may need to run additional tests or more robust models to inform interpretation.
+
+---
+
+#### Statistical vs. practical significance
+
+When analyzing the relationship between state funding and housing availability, it is important to consider both statistical significance and practical significance.
+
+*Statistical significance* refers to the likelihood that the observed relationship or difference between variables is not due to chance. It is determined through statistical tests, such as hypothesis testing or p-values. In this context, statistical significance would indicate whether there is evidence to suggest that state funding has a statistically significant effect on housing availability. A statistically significant result suggests that the relationship between the variables is unlikely to have occurred by random chance.
+
+*Practical significance* focuses on the magnitude or practical importance of the observed relationship. It asks whether the observed effect size is meaningful or substantial in real-world terms. In the case of state funding and housing availability, practical significance would involve evaluating whether the observed impact of state funding on housing availability is large enough to have a meaningful or substantial effect on the availability of housing units.
+
+Note, however, that while statistical significance provides evidence of a relationship, it does not necessarily imply practical importance. A statistically significant relationship may exist but have a negligible or trivial effect in practice. Conversely, a relationship may have practical significance, even if it does not reach statistical significance due to limited sample size or other factors.
+
+---
+
+### Replication studies
+
+Exploring varied statistical outputs and their significance in a social justice context requires care, both in terms of the underlying theories that relate to the variables themselves and their use across different context. An additional factor that we have discussed relates to the role of the theoretical constructions and their applicability to issues of social injustice. 
+
+More often than not, caution should take the lead when developing new models. In these instances, some variation on what is known as a replication study can become a valuable tool. A *replication study* is a type of study that aims to reproduce or replicate the findings of a previous study. In the context of our course, the replication frameworks can be applied to examine the relationships between variables across contexts and different populations.
+
+There are different types of replication studies.
+
+  - **Direct replication**: In this replication study type, researchers attempt to reproduce the original study as closely as possible, meaning they follow the same research design, methodologies, and data analysis procedures.
+  
+  - **Partial replication**: In this replication study type, researchers attempt to replicate only a portion of the original study. Often, researchers doing a partial replication study focus on a specific aspect, variable, or component of the study.
+  
+  - **Conceptual replication**: In this replication study type, researchers conduct a replication analysis that focuses on the same research question(s) but through the use of different methods, measures, or population groups.
+  
+While replication studies are often used to help ensure the credibility and seeming generalizations found in statistical research findings, they can also serve as a part of a broader process to examine the role of context in statistical models. Importantly, failure to replicate the findings of a study do not mean that the original study findings were incorrect or flawed. Together, these types of explorations can contribute to scientific knowledge and provide evidence to help us understand the role of theory and the practice of social justice.
+
+---
+
+### Beyond regression
+
+Researchers have access to a wide range of advanced statistical techniques and methodologies that provide deeper insights into complex relationships and patterns within data. These approaches go beyond the linear relationships examined in regression analysis and allow researchers to explore non-linear, interactive, and dynamic effects among variables. By utilizing these advanced techniques, researchers can uncover hidden patterns, make more accurate predictions, account for complex interactions, and gain a more comprehensive understanding of the phenomena under investigation. 
+
+Some of these methods often provide greater flexibility in handling missing data, dealing with outliers, and accommodating various types of data structures. Overall, the utilization of these advanced statistical techniques expands the availability of tools to consider ways to delve deeper into the complexities of their data and extract meaningful insights.
+
+## Part II: Content
+
+This week, we use some standard data included in R to further discuss model interpretation. 
+
+While these data sets do not directly connect to the content of our course, they provide some useful examples to return to as they are discussed on many websites that use `R` and that can be found in online forums.
+
+Each example illustrates different scenarios for interpreting linear models using the summary output. Remember to consider coefficients, standard errors, t-values, and p-values to assess the significance and direction of relationships between predictors and the response variable. Additionally, theory construction and relevant knowledge and context are crucial for a comprehensive interpretation of the results.
+
+---
+
+```{r}
+#| echo: false
+#| output: false
+#| warning: false
+data(mtcars)
+```
+
+This data is from the 1974 Motor Trend US magazine. The data set comprises fuel consumption and 10 aspects of automobile design and performance for 32 automobiles (1973--74 models). You could run similar models using data in the `critstats` package.
+
+```{r}
+summary(mtcars)
+```
+
+#### Example 1: Simple Linear Regression
+
+```{r}
+# Fit a simple linear regression model
+model <- lm(mpg ~ hp, data = mtcars)
+
+# Print the model summary
+summary(model)
+```
+
+The summary output provides information about the coefficients, standard errors, t-values, and p-values. In this case, the intercept represents the estimated baseline miles per gallon (mpg) when horsepower is zero. The coefficient for horsepower indicates the estimated change in mpg for each unit increase in horsepower.
+
+---
+
+#### Example 2: Multiple Linear Regression
+
+```{r}
+# Fit a multiple linear regression model
+model <- lm(mpg ~ hp + wt, data = mtcars)
+
+# Print the model summary
+summary(model)
+```
+
+The summary output provides interpretation for each coefficient. For example, the coefficient for horsepower represents the estimated change in mpg for each unit increase in horsepower, holding weight constant. Similarly, the coefficient for weight represents the estimated change in mpg for each unit increase in weight, holding horsepower constant.
+
+---
+
+#### Example 3: Categorical Predictor
+
+```{r}
+# Fit a linear regression model with a categorical predictor
+model <- lm(mpg ~ factor(cyl), data = mtcars)
+
+# Print the model summary
+summary(model)
+```
+
+When a categorical predictor, such as "cyl" (number of cylinders), is included in the model, R automatically treats it as a set of dummy variables. The summary output provides the coefficients for each category level (e.g., 4 cylinders, 6 cylinders, 8 cylinders). These coefficients represent the estimated difference in the response variable (mpg) compared to the reference category (usually the intercept).
+
+---
+
+#### Example 4: Interaction Effect
+
+```{r}
+# Fit a linear regression model with an interaction term
+model <- lm(mpg ~ hp * wt, data = mtcars)
+
+# Print the model summary
+summary(model)
+```
+
+When an interaction term (e.g., horsepower * weight) is included in the model, the summary output provides coefficients for both main effects (horsepower and weight) as well as the interaction term. The interaction coefficient represents the change in the relationship between mpg and horsepower as weight increases.
+
+---
+
+## Part III: Code
+
+To be released.
+

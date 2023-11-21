@@ -135,12 +135,12 @@ Multiple Variable Analysis and Multivariate Analysis are two terms often used in
 
 ---
 
-## Multivariable vs. Multivariate
+### Multivariable vs. Multivariate
 
 *Multiple variable analysis* investigates the influence of individual independent variables on a single dependent variable, while *multivariate analysis* explores the relationships and patterns among multiple variables simultaneously. Multiple Variable Analysis is often used when studying the effects of specific factors, while multivariate analysis is employed to uncover broader patterns and structures within a dataset. Both approaches are valuable in data analysis, and the choice between them depends on the research objectives and the nature of the data being analyzed.
 
 ::: {.callout-caution icon="false"}
-### **Definitions**: Multiple variable analysis vs. Multivariate analysis
+#### **Definitions**: Multiple variable analysis vs. Multivariate analysis
 
 **Multiple Variable Analysis**: Multiple Variable Analysis refers to the process of examining the relationships between several independent variables and a single dependent variable. It aims to understand how each independent variable influences or predicts the dependent variable individually, while controlling for other variables. In this analysis, each independent variable is analyzed separately, often using techniques such as regression analysis or analysis of variance (ANOVA).
 
