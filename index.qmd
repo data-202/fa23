@@ -7,7 +7,7 @@ subtitle: "Statistically Measuring and Modeling Social Justice"
 
 ::: column-screen-inset-right
 |  Part   |       Week        | Day           | Topics                                                       | HWs                      |          Labs           |            Papers             |                      Other                      |     |
-|:------:|:------:|--------|--------|--------|:------:|:------:|:------:|:------:|
+|:------:|:------:|--------|---------|--------|:------:|:------:|:------:|:------:|
 |    I    |  [1](week1.html)  | Tues, Aug 22  | [Introduction to the course](index.html)                     | [HW 0](assignments.html) | [Lab 0](computing.html) |                               |                                                 |     |
 |         |  [2](week2.html)  | Tues, Aug 29  | [Foundations](week2-slides.html)                             |                          |                         |     [Paper 1](week1.html)     |                                                 |     |
 |         |  [3](week3.html)  | Tues, Sept 5  | [Theory construction](week3-slides.html)                     |                          |                         |        (Paper 1 edits)        |                                                 |     |
@@ -20,10 +20,10 @@ subtitle: "Statistically Measuring and Modeling Social Justice"
 |         | [10](week10.html) | Tues, Oct 24  | [Midterm examination week](week10-slides.html)               |                          |                         |                               |               Midterm examination               |     |
 |         | [11](week11.html) | Tues, Oct 31  | [Bivariate regression analysis (part a)](week11-slides.html) | [HW 3](hw/hw3.html)      | [Lab 3](labs/lab3.html) |                               |                                                 |     |
 |         | [12](week12.html) | Tues, Nov 7   | [Bivariate regression analysis (part b)](week12-slides.html) |                          |                         | [Paper 3](papers/paper3.html) |                                                 |     |
-|   IV    |        [13](week13.html)         | Tues, Nov 14  | [Multivariate analysis](week13-slides.html)                                      |                      |                    |                               |                                                 |     |
-|         |        14         | Tues, Nov 21  | Overview of additional models                                |                          |                         |                               |                              [Annotated bibliography](papers/annotated.html)                   |     | 
+|   IV    | [13](week13.html) | Tues, Nov 14  | [Multivariate analysis](week13-slides.html)                  |                          |                         |                               |                                                 |     |
+|         |        [14](week14.html)         | Tues, Nov 21  | [Overview of additional models](week14-slides.html)                                |                          |                         |                               | [Annotated bibliography](papers/annotated.html) |     |
 |         |        15         | Tues, Nov 28  | Wrap-up                                                      | HW 4                     |          Lab 4          |                               |                                                 |     |
-| Wrap-up |        16         | Tues, Dec 5   | Open office hours                                            |                          |                         |            Paper 4            |                                                 |     |
+| Wrap-up |        16         | Tues, Dec 5   | Open office hours                                            |                          |                         |            [Paper 4](papers/paper4.html)            |                                                 |     |
 |         |        17         | Tues, Dec 12  | No class meeting                                             |                          |                         |                               |                Final examination                |     |
 :::
 

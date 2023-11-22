@@ -77,6 +77,8 @@ website:
           text: Week 12
         - href: week13.qmd
           text: Week 13
+        - href: week14.qmd
+          text: Week 14
     - section: "Appendix"
       contents:
         - section: "Homeworks"
@@ -87,6 +89,8 @@ website:
               text: HW 2
             - href: hw/hw3.qmd
               text: HW 3
+            - href: hw/hw4.qmd
+              text: HW 4
         - section: "Labs"
           contents:
             - href: labs/lab1.qmd
@@ -95,6 +99,8 @@ website:
               text: Lab 2
             - href: labs/lab3.qmd
               text: Lab 3
+            - href: labs/lab4.qmd
+              text: Lab 4
         - section: "Papers"
           contents: 
             - href: papers/annotated.qmd
@@ -103,6 +109,8 @@ website:
               text: Paper 2
             - href: papers/paper3.qmd
               text: Paper 3
+            - href: papers/paper4.qmd
+              text: Paper 4
         - href: solutions.qmd
           text: "Solutions"
 
