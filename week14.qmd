@@ -141,7 +141,6 @@ summary(housing_availability)
 plot(funding, x)
 plot(housing_availability, y) 
 ```
-```
 
 We can also produce quick plots to examine the relationship between each variable.
 
